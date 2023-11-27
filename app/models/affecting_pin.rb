@@ -1,4 +1,4 @@
 class AffectedPin < ApplicationRecord
-    belongs_to :user
-    belongs_to :incident
-  end
+  belongs_to :user
+  belongs_to :incident
+end
