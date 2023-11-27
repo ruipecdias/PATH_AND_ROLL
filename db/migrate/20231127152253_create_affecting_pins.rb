@@ -1,6 +1,6 @@
-class CreateAffectedPins < ActiveRecord::Migration[7.1]
+class CreateAffectingPins < ActiveRecord::Migration[7.1]
   def change
-    create_table :affected_pins do |t|
+    create_table :affecting_pins do |t|
       t.references :user, null: false, foreign_key: true
       t.references :incident, null: false, foreign_key: true
 
