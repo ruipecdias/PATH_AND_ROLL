@@ -1,3 +1,5 @@
 class Incident < ApplicationRecord
-  belongs_to :user
+  # other associations
+  has_many :affected_pins
+  has_many :users, through: :affected_pins
 end
