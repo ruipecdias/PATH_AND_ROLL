@@ -1,0 +1,2 @@
+class AffectingPinsController < ApplicationController
+end
