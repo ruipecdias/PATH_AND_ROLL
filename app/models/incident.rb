@@ -7,6 +7,7 @@ class Incident < ApplicationRecord
   validates :location, presence: true
   validates :category, presence: true, inclusion: { in: ['Accident', 'Construction', 'Structural'] }
   validates :description, presence: true
-  validates :status, inclusion: { in: ['resolved', 'unresolved'] }
-end
+  enum status: { unresolved: false, resolved: true }
 
+  validates :status, presence: true
+end
