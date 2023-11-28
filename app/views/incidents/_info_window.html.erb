@@ -1,4 +1,5 @@
 <div>
   <h3><%= incident.location %></h3>
   <p><%= incident.category %></p>
+  <%= link_to 'View Details', incident_path(incident), target: '_blank' %>
 </div>
