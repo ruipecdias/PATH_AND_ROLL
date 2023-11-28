@@ -2,6 +2,7 @@ class Incident < ApplicationRecord
 
   belongs_to :user
   has_many :comments
+  has_many :affecting_pins
   has_many :users, through: :affecting_pins
 
   validates :location, presence: true

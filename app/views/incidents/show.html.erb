@@ -1,15 +1,16 @@
 <!-- app/views/incidents/show.html.erb -->
+<p><%= @incident.affecting_pins.count %> <%= 'person'.pluralize(@incident.affecting_pins.count) %> affected</p>
+<p><%= @incident.category %></p>
 <h1><%= @incident.location %></h1>
-<p><strong>Category:</strong> <%= @incident.category %></p>
-<p><strong>Status:</strong> <%= @incident.status.capitalize %></p>
+
+<!-- need to improve line below -->
+<p>Is it still there?Y/N</p>
 <p><strong>Description:</strong> <%= @incident.description %></p>
 
-<% if @incident.img_url.present? %>
-  <p><strong>Image:</strong></p>
-  <%= image_tag @incident.img_url, alt: 'Incident Image' %>
-<% end %>
+<%= image_tag @incident.img_url, alt: 'Incident Image' %>
 
-<p><strong>Comment Count:</strong> <%= @incident.comments_count %></p>
+<p><%= @incident.comments_count %> <%= 'comment'.pluralize(@incident.comments_count) %></p>
 
 
+<!-- !!!!!!!!!!!!! Need to put this as a arrow button !!!!!!!!!!!!! -->
 <%= link_to 'Back to Incidents', incidents_path %>
