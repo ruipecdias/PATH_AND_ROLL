@@ -9,7 +9,7 @@ export default class extends Controller {
 
     this.map = new mapboxgl.Map({
       container: this.element,
-      style: 'mapbox://styles/mapbox/streets-v11'
+      style: 'mapbox://styles/sixiao01/clpii274n00mn01pjd1wld7f1'
     });
 
     this.#addMarkersToMap();
@@ -19,9 +19,14 @@ export default class extends Controller {
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
       const popup = new mapboxgl.Popup().setHTML(marker.info_window_html);
-      new mapboxgl.Marker()
-        .setLngLat([ marker.lng, marker.lat ])
-        .addTo(this.map);
+      const customMarker = document.createElement("div")
+      customMarker.innerHTML = marker.marker_html
+  
+      // Pass the element as an argument to the new marker
+      new mapboxgl.Marker(customMarker)
+        .setLngLat([marker.lng, marker.lat])
+        .setPopup(popup)
+        .addTo(this.map)
     });
   }
 
