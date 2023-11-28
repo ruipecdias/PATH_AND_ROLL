@@ -1,0 +1,15 @@
+<!-- app/views/incidents/show.html.erb -->
+<h1><%= @incident.location %></h1>
+<p><strong>Category:</strong> <%= @incident.category %></p>
+<p><strong>Status:</strong> <%= @incident.status.capitalize %></p>
+<p><strong>Description:</strong> <%= @incident.description %></p>
+
+<% if @incident.img_url.present? %>
+  <p><strong>Image:</strong></p>
+  <%= image_tag @incident.img_url, alt: 'Incident Image' %>
+<% end %>
+
+<p><strong>Comment Count:</strong> <%= @incident.comments_count %></p>
+
+
+<%= link_to 'Back to Incidents', incidents_path %>
