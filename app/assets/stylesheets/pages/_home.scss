@@ -51,10 +51,10 @@ h2 {
 
 .login-page {
   object-fit: cover;
-  height: 120vh;
+  height: 100vh;
   flex-direction: row;
-  background-image: url("pathroll.jpg");
-  background-size: contain; /* Set the background size to cover the container */
+  background-image: url("pathroll2.jpg");
+  background-size: cover; /* Set the background size to cover the container */
   background-repeat: no-repeat; /* Prevent the background image from repeating */
   background-position: center;
 }
