@@ -1,16 +1,23 @@
 <!-- app/views/incidents/show.html.erb -->
-<p><%= @incident.affecting_pins.count %> <%= 'person'.pluralize(@incident.affecting_pins.count) %> affected</p>
-<p><%= @incident.category %></p>
-<h1><%= @incident.location %></h1>
+<div id='map' style='width: 100%; height: 250px;'
+  data-controller="map"
+  data-map-markers-value="<%= @markers.to_json %>"
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+</div>
 
-<!-- need to improve line below -->
-<p>Is it still there?Y/N</p>
-<p><strong>Description:</strong> <%= @incident.description %></p>
+<div>
+  <p><%= @incident.affecting_pins.count %> <%= 'person'.pluralize(@incident.affecting_pins.count) %> affected</p>
+  <p><%= @incident.category %></p>
+  <h1><%= @incident.location %></h1>
 
-<%= image_tag @incident.img_url, alt: 'Incident Image' %>
+  <!-- need to improve line below -->
+  <p>Is it still there?Y/N</p>
+  <p><strong>Description:</strong> <%= @incident.description %></p>
 
-<p><%= @incident.comments_count %> <%= 'comment'.pluralize(@incident.comments_count) %></p>
+  <%= image_tag @incident.img_url, alt: 'Incident Image' %>
 
+  <p><%= @incident.comments_count %> <%= 'comment'.pluralize(@incident.comments_count) %></p>
 
-<!-- !!!!!!!!!!!!! Need to put this as a arrow button !!!!!!!!!!!!! -->
-<%= link_to 'Back to Incidents', incidents_path %>
+  <!-- !!!!!!!!!!!!! Need to put this as a arrow button !!!!!!!!!!!!! -->
+  <%= link_to 'Back to Incidents', incidents_path %>
+</div>
