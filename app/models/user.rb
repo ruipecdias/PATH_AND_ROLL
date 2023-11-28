@@ -7,6 +7,8 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
 
+  has_many :comments
+  has_many :affecting_pins
   has_many :incidents, through: :affecting_pins
   has_many :incidents
 end

@@ -1,6 +1,7 @@
 class Incident < ApplicationRecord
 
   belongs_to :user
+  has_many :affecting_pins
   has_many :comments, dependent: :destroy
   has_many :users, through: :affecting_pins
 
