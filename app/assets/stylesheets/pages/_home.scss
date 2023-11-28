@@ -26,6 +26,29 @@ h2 {
   color: $dark-gray;
 }
 
+
+/* THESE are for the share button!*/
+.share-options {
+  position: relative;
+}
+
+.options-container {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.show-options {
+  display: flex; /* Use flex to align icons horizontally */
+}
+/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
+/* THESE are for the share button!*/
+
 .login-page {
   object-fit: cover;
   height: 120vh;
@@ -47,3 +70,4 @@ a {
 .custom-link {
   color: gray;
 }
+
