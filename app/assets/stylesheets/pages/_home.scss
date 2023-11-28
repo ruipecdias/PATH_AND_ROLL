@@ -1,1 +1,26 @@
 // Specific CSS for your home-page
+.landing-page {
+  object-fit: cover;
+  height: 100vh;
+  flex-direction: row;
+  background-image: url("pathroll.jpg");
+  background-size: cover; /* Set the background size to cover the container */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+  background-position: center;
+}
+
+body {
+  font-family: 'Rubik', sans-serif;
+  color: $dark-gray;
+}
+
+h1 {
+  font-family: 'Rubik', sans-serif;
+  color: $orange;
+  font-size: 36px;
+}
+
+h2 {
+  font-family: 'Rubik', sans-serif;
+  color: $dark-gray;
+}
