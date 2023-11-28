@@ -1,7 +1,7 @@
 class Incident < ApplicationRecord
 
   belongs_to :user
-  has_many :comments
+  has_many :comments, dependent: :destroy
   has_many :users, through: :affecting_pins
 
   validates :location, presence: true
@@ -10,4 +10,8 @@ class Incident < ApplicationRecord
   enum status: { unresolved: false, resolved: true }
 
   validates :status, presence: true
+
+  geocoded_by :location
+  after_validation :geocode, if: :will_save_change_to_location?
+
 end

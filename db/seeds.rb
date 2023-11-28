@@ -8,6 +8,9 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 # seeds.rb
+AffectingPin.destroy_all
+Incident.destroy_all
+User.destroy_all
 
 # Create 10 users
 10.times do
@@ -25,7 +28,7 @@ categories = ['Accident', 'Construction', 'Structural']
 
 5.times do
   incident = Incident.create!(
-    location: Faker::Address.full_address,
+    location: "Lisbon",
     category: categories.sample,
     img_url: Faker::LoremPixel.image,
     description: Faker::Lorem.paragraph,
