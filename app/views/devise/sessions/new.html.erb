@@ -1,6 +1,6 @@
+<%# The size of the image has to be fixed %>
 <div class="login-page px-4 py-5">
 <div class="d-flex justify-content-center py-5">
-<%# The size of the image has to be fixed %>
 <%= image_tag 'pathroll_logo.png', style: 'width: 190px;' %>
 </div>
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -34,7 +34,7 @@
 Don't have an account?
 </div>
   <div class="form-actions d-flex justify-content-center">
-<strong><%= link_to "Sign in!", new_registration_path(resource_name) %></strong>
+<strong><%= link_to "Sign up!", new_registration_path(resource_name) %></strong>
 </div>
 </div>
 </div>
