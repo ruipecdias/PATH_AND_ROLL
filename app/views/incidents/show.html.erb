@@ -1,69 +1,70 @@
 <!-- app/views/incidents/show.html.erb -->
-<div id='map' style='width: 100%; height: 250px;'
+<div>
+  <div class="rounded-4">
+    <p><%= @incident.affecting_pins.count %> <%= 'person'.pluralize(@incident.affecting_pins.count) %> affected</p>
+    <p><%= @incident.category %></p>
+    <h1><%= @incident.location %></h1>
+
+    <!-- need to improve line below -->
+    <p>Is it still there?Y/N</p>
+    <p><strong>Description:</strong> <%= @incident.description %></p>
+
+    <%= image_tag @incident.img_url, alt: 'Incident Image' %>
+
+    <%= link_to incident_comments_path(incident_id: @incident.id) do %>
+      <button type="button" class="btn btn-link">
+        <%= @incident.comments_count %> <%= 'comment'.pluralize(@incident.comments_count) %>
+      </button>
+    <% end %>
+
+    <!-- !!!!!!!!!!!!! Need to put this as a arrow button !!!!!!!!!!!!! -->
+    <%= link_to 'Back to Incidents', incidents_path %>
+
+        <!-- Share Button with Options -->
+    <div class="share-options">
+      <button class="share-button" id="shareButton">
+        <i class="fas fa-share-alt"></i>
+      </button>
+
+      <div class="options-container" id="optionsContainer">
+        <!-- WhatsApp Share Button -->
+        <%= link_to "https://api.whatsapp.com/send?text=#{incident_url(@incident)}", target: '_blank', title: 'Share on WhatsApp' do %>
+          <i class="fab fa-whatsapp"></i>
+        <% end %>
+
+        <!-- Copy Link Button -->
+        <button id="copyLinkButton" title="Copy Link">
+          <i class="far fa-copy"></i>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const shareButton = document.getElementById('shareButton');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const copyLinkButton = document.getElementById('copyLinkButton');
+
+        shareButton.addEventListener('click', function () {
+          optionsContainer.classList.toggle('show-options');
+        });
+
+        copyLinkButton.addEventListener('click', function () {
+          const incidentUrl = '<%= incident_url(@incident) %>';
+          const tempInput = document.createElement('input');
+          document.body.appendChild(tempInput);
+          tempInput.value = incidentUrl;
+          tempInput.select();
+          document.execCommand('copy');
+          document.body.removeChild(tempInput);
+          alert('Link copied to clipboard!');
+        });
+      });
+    </script>
+  </div>
+</div>
+<div id='map' style='width: 100%; height: 100vh;'
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-</div>
-
-<div>
-  <p><%= @incident.affecting_pins.count %> <%= 'person'.pluralize(@incident.affecting_pins.count) %> affected</p>
-  <p><%= @incident.category %></p>
-  <h1><%= @incident.location %></h1>
-
-  <!-- need to improve line below -->
-  <p>Is it still there?Y/N</p>
-  <p><strong>Description:</strong> <%= @incident.description %></p>
-
-  <%= image_tag @incident.img_url, alt: 'Incident Image' %>
-
-  <%= link_to incident_comments_path(incident_id: @incident.id) do %>
-    <button type="button" class="btn btn-link">
-      <%= @incident.comments_count %> <%= 'comment'.pluralize(@incident.comments_count) %>
-    </button>
-  <% end %>
-
-  <!-- !!!!!!!!!!!!! Need to put this as a arrow button !!!!!!!!!!!!! -->
-  <%= link_to 'Back to Incidents', incidents_path %>
-
-      <!-- Share Button with Options -->
-  <div class="share-options">
-    <button class="share-button" id="shareButton">
-      <i class="fas fa-share-alt"></i>
-    </button>
-
-    <div class="options-container" id="optionsContainer">
-      <!-- WhatsApp Share Button -->
-      <%= link_to "https://api.whatsapp.com/send?text=#{incident_url(@incident)}", target: '_blank', title: 'Share on WhatsApp' do %>
-        <i class="fab fa-whatsapp"></i>
-      <% end %>
-
-      <!-- Copy Link Button -->
-      <button id="copyLinkButton" title="Copy Link">
-        <i class="far fa-copy"></i>
-      </button>
-    </div>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const shareButton = document.getElementById('shareButton');
-      const optionsContainer = document.getElementById('optionsContainer');
-      const copyLinkButton = document.getElementById('copyLinkButton');
-
-      shareButton.addEventListener('click', function () {
-        optionsContainer.classList.toggle('show-options');
-      });
-
-      copyLinkButton.addEventListener('click', function () {
-        const incidentUrl = '<%= incident_url(@incident) %>';
-        const tempInput = document.createElement('input');
-        document.body.appendChild(tempInput);
-        tempInput.value = incidentUrl;
-        tempInput.select();
-        document.execCommand('copy');
-        document.body.removeChild(tempInput);
-        alert('Link copied to clipboard!');
-      });
-    });
-  </script>
 </div>
