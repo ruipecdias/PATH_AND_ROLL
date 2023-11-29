@@ -1,56 +1,61 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-# seeds.rb
+
 AffectingPin.destroy_all
+Comment.destroy_all
 Incident.destroy_all
 User.destroy_all
 
-# Create 10 users
-10.times do
+# Create Users
+50.times do
   User.create!(
-    email: Faker::Internet.email,
-    password: 'password', # You might want to change this for production
+    email: Faker::Internet.unique.email,
+    password: 'password',
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name
   )
 end
 
-# Create 5 incidents and 3 comments per incident
 users = User.all
-categories = ['Accident', 'Construction', 'Structural']
 
-5.times do
-  incident = Incident.create!(
-    location: "Lisbon",
-    category: categories.sample,
-    img_url: Faker::LoremPixel.image,
-    description: Faker::Lorem.paragraph,
+# Incident Locations in Downtown Lisbon
+locations = [
+  'Praça do Comércio', 'Rossio Square', 'Avenida da Liberdade',
+  'Chiado', 'Bairro Alto', 'Alfama', 'Cais do Sodré', 'Príncipe Real',
+  'Santa Justa Lift', 'Campo de Ourique'
+]
+
+# Create Incidents
+locations.each_with_index do |location, index|
+  category = ['Accident', 'Construction', 'Structural'].sample
+  description = case category
+                when 'Accident'
+                  "A minor biking incident occurred near #{location}, Lisbon, with no severe injuries but some traffic disruption."
+                when 'Construction'
+                  "Unexpected construction work at #{location}, Lisbon, leading to pedestrian detours and minor inconvenience."
+                when 'Structural'
+                  "A small structural issue was noticed at a building in #{location}, Lisbon, causing some concern among residents."
+                end
+
+  Incident.create!(
     user: users.sample,
-    comments_count: 3,
-    status: Incident.statuses.keys.sample
+    location: "#{location}, Lisbon",
+    category: category,
+    description: description,
+    img_url: "https://via.placeholder.com/150", # Replace with actual image URLs
+    status: [true, false].sample
   )
+end
 
-  # Create 3 comments for each incident
-  3.times do
+incidents = Incident.all
+
+# Create Comments for each Incident
+incidents.each do |incident|
+  rand(5..10).times do
     Comment.create!(
-      incident: incident,
       user: users.sample,
+      incident: incident,
       content: Faker::Lorem.sentence
     )
   end
 end
 
-# Create associations between users and incidents through affecting_pins
-users.each do |user|
-  incidents = Incident.all.sample(rand(1..3))
-  incidents.each do |incident|
-    AffectingPin.create!(user: user, incident: incident)
-  end
-end
+puts "Seeding completed!"
