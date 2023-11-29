@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   def index
-    @comments = Comment.all
+    @incident = Incident.find(params[:incident_id])
+    @comments = @incident.comments
   end
 end

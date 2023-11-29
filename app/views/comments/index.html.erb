@@ -1,0 +1,26 @@
+<%= link_to 'Back to Incident', incident_path(@incident), class: "back-link" %>
+<h1>Comments</h1>
+<h2><%= @comments.count %> Comments</h2>
+
+<ul>
+  <% @comments.each do |comment| %>
+    <li>
+        <img src="https://via.placeholder.com/150" alt="<%= comment.user.first_name %> profile" style="width: 50px; height: 50px; border-radius: 50%;">
+      <%= comment.user.first_name %>
+      <span><%= time_ago_in_words(comment.created_at) %> ago</span>
+
+      <p><%= comment.content %></p>
+      <% if comment.img_url.present? %>
+        <img src="<%= comment.img_url %>" alt="Comment image" style="max-width: 200px; height: auto;">
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<h3>Write a Comment</h3>
+<%= form_with(model: [@incident, Comment.new], local: true) do |form| %>
+  <%= form.text_area :content, required: true %><br>
+  <%= form.label :img_url, "Upload a photo:" %>
+  <%= form.file_field :img_url %><br>
+  <%= form.submit "Submit" %>
+<% end %>
