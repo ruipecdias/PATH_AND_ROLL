@@ -1,4 +1,5 @@
 <!-- app/views/incidents/show.html.erb -->
+<div class="d-flex justify-content-bottom">
 <div>
   <div class="rounded-4">
     <p><%= @incident.affecting_pins.count %> <%= 'person'.pluralize(@incident.affecting_pins.count) %> affected</p>
@@ -67,4 +68,5 @@
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+</div>
 </div>
