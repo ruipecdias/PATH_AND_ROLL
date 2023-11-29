@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   resources :incidents do
     resources :comments, shallow: true
   end
+  get '/dashboard', to: 'pages#dashboard', as: 'dashboard'
 end

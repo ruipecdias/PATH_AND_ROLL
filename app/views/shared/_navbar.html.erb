@@ -4,9 +4,14 @@
   <div class="container-fluid">
     <div class="navbar-nav flex-grow-1">
       <div class="d-flex justify-content-around">
-      <a class="nav-link" href="#"><i class="fa-solid fa-house" style="color: #7b7f83;"></i></a>
-      <a class="nav-link" href="#"><%= image_tag("cone.png", class: "cone")%></a>
-      <a class="nav-link" href="#"><i class="fas fa-user" style="color: #7b7f83;"></i></a>
+        <%= link_to incidents_path, class: 'nav-link' do %>
+          <i class="fa-solid fa-house" style="color: #7B7F83;"></i>
+        <% end %>
+        <%= link_to new_incident_path, class: 'nav-link' do %>
+          <%= image_tag("cone.png", class: "cone")%>
+        <% end %>
+        <%= link_to dashboard_path, class: 'nav-link' do %>
+          <i class="fas fa-user" style="color: #7B7F83;"></i>
       </div>
     </div>
   </div>
