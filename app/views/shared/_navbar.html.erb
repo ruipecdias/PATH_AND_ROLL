@@ -4,9 +4,15 @@
   <div class="container-fluid">
     <div class="navbar-nav flex-grow-1">
       <div class="d-flex justify-content-around">
-      <a class="nav-link" href="#"><i class="fas fa-home"></i></a>
-      <a class="nav-link" href="#"><i class="fa-solid fa-mound"></i></a>
-      <a class="nav-link" href="#"><i class="fas fa-user"></i></a>
+        <%= link_to incidents_path, class: 'nav-link' do %>
+          <i class="fas fa-home"></i>
+        <% end %>
+        <%= link_to new_incident_path, class: 'nav-link' do %>
+          <i class="fa-solid fa-mound"></i>
+        <% end %>
+        <%= link_to dashboard_path, class: 'nav-link' do %>
+          <i class="fas fa-user"></i>
+        <% end %>
       </div>
     </div>
   </div>
