@@ -40,6 +40,10 @@
       </div>
     </div>
 
+    <%= link_to incident_affecting_pins_path(@incident), method: :post, remote: true, class: 'btn btn-link', id: 'toggleAffectButton' do %>
+      <span id="toggleText">It affects me</span>
+    <% end %>
+
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         const shareButton = document.getElementById('shareButton');
@@ -59,6 +63,27 @@
           document.execCommand('copy');
           document.body.removeChild(tempInput);
           alert('Link copied to clipboard!');
+        });
+      });
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const toggleAffectButton = document.getElementById('toggleAffectButton');
+        const toggleText = document.getElementById('toggleText');
+
+        toggleAffectButton.addEventListener('ajax:success', function (event) {
+          const [data, status, xhr] = event.detail;
+
+          // Toggle the button text and update the affecting_pins count
+          const isAffected = data['is_affected'];
+          const affectingPinsCount = data['affecting_pins_count'];
+
+          toggleText.innerText = isAffected ? 'It doesn\'t affect me' : 'It affects me';
+
+          // Update the affecting_pins count display (if needed)
+          const affectingPinsCountDisplay = document.getElementById('affectingPinsCount');
+          if (affectingPinsCountDisplay) {
+            affectingPinsCountDisplay.innerText = affectingPinsCount;
+          }
         });
       });
     </script>

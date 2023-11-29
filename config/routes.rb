@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   resources :incidents do
     resources :comments, only: [:index, :create], shallow: true
+    resources :affecting_pins, only: [:create]
   end
   get '/dashboard', to: 'pages#dashboard', as: 'dashboard'
 end
