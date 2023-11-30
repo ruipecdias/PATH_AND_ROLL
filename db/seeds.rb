@@ -71,4 +71,26 @@ incidents.each do |incident|
   end
 end
 
+additional_imgurls = [
+  "https://via.placeholder.com/150/1",
+  "https://via.placeholder.com/150/2",
+  "https://via.placeholder.com/150/3"
+]
+
+# Upload images and create a new incident
+additional_img_urls_uploaded = additional_imgurls.map do |img_url|
+  Cloudinary::Uploader.upload(img_url)['url']
+end
+
+# Assuming you want to store these URLs in a serialized array or similar
+new_incident = Incident.create!(
+  user: users.sample,
+  location: 'New Location, Lisbon',
+  category: 'New Category',
+  description: 'A new incident description.',
+  img_url: additional_img_urls_uploaded.join(', '), # Storing the URLs as a comma-separated string
+  status: [true, false].sample
+)
+
+
 puts "Seeding completed!"
