@@ -4,7 +4,8 @@
   <div class="offcanvas-body small mx-3">
     <div class="d-flex justify-content-between">
       <div class="d-flex flex-column">
-        <p><%= incident.affecting_pins.count %> <%= 'person'.pluralize(incident.affecting_pins.count) %> affected</p>
+        <p class="m-0"><em><%= incident.affecting_pins.count %>
+          <%= 'person'.pluralize(incident.affecting_pins.count) %> affected</em></p>
         <h2><%= incident.category %></h2>
         <p><i class="fa-solid fa-location-dot" style="color: #7b7f83;"></i> <%= incident.location %><p>
 
@@ -13,13 +14,26 @@
           <i class="fa-solid fa-triangle-exclamation" style="color: #ffffff;"></i> It affects me</button>
 
 
+          
+        <div class="d-flex justify-content-between">
+          <%= link_to incident_affecting_pins_path(incident),
+            method: :post, remote: true, class: 'btn btn-link',
+            id: 'toggleAffectButton' do %>
+            <span id="toggleText" class="btn btn-primary text-white rounded-4 px-4 py-2">
+              <i class="fa-solid fa-triangle-exclamation" style="color: #ffffff;"></i>
+              It affects me</span>
+          <% end %>
+          
           <%= link_to incident_comments_path(incident_id: incident.id) do %>
             <button type="button" class="btn btn-light rounded-4 px-4 py-2">
               <%= incident.comments_count %> <%= 'comment'.pluralize(incident.comments_count) %>
             </button>
           <% end %>
+        </div>
+
       </div>
-                <!-- Share Button with Options -->
+
+      <!-- Share Button with Options -->
       <div class="share-options">
         <div class="share-button" id="shareButton">
           <i class="fa-solid fa-share-nodes" style="color: #7b7f83;"></i>
@@ -73,13 +87,12 @@
           }
 
           isBtnToggled = !isBtnToggled;
-        }
+
       </script>
     </div>
     <!-- need to improve line below -->
-      <p>Is it still there? Yes No</p>
-      <p><strong>Description:</strong> <%= incident.description %></p>
-      <%= image_tag incident.img_url, alt: 'Incident Image', class: 'w-100' %>
-
+    <p>Is it still there? Yes No</p>
+    <p><strong>Description:</strong> <%= incident.description %></p>
+    <%= image_tag incident.img_url, alt: 'Incident Image', class: 'w-50' %>
   </div>
 </div>
