@@ -20,7 +20,6 @@
     <%# Line below serves to delete navbar from landing and ragistration pages %>
     <% unless current_page?(root_path) || current_page?(new_user_registration_path) || current_page?(new_user_session_path) %>
     <%= render "shared/navbar" %>
-    <%= render "shared/flashes" %>
     <% end %>
     <%= yield %>
   </body>
