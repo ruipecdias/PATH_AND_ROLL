@@ -1,9 +1,23 @@
 // Import page-specific CSS files here.
 @import "home";
 
-.offcanvas.offcanvas-bottom {
-  // transform: translateY(-55px);
-  border-radius: 15px;
+.offcanvas {
+  position: fixed;
+  left: 0;
+  right: 0;
+  overflow: hidden; /* Hide both horizontal and vertical scrollbars */
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
   background-color: #EBECED;
-  height: auto;
+  box-shadow: 0px -10px 20px -7px rgba(0, 0, 0, 0.3);
+  bottom: 58px;
+  height: max-content;
+}
+
+.offcanvas-backdrop {
+  background-color: transparent;
+}
+
+.offcanvas, .offcanvas-xxl, .offcanvas-xl, .offcanvas-lg, .offcanvas-md, .offcanvas-sm {
+  --bs-offcanvas-height: fit-content;
 }
