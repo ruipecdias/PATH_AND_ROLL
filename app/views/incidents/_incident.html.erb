@@ -7,9 +7,11 @@
         <p><%= incident.affecting_pins.count %> <%= 'person'.pluralize(incident.affecting_pins.count) %> affected</p>
         <h2><%= incident.category %></h2>
         <p><i class="fa-solid fa-location-dot" style="color: #7b7f83;"></i> <%= incident.location %><p>
-        <%= method: :post, remote: true, class: 'btn btn-link', id: 'toggleAffectButton' do %>
-        <span id="toggleText" class="btn btn-primary text-white rounded-4 px-4 py-2"><i class="fa-solid fa-triangle-exclamation" style="color: #ffffff;"></i> It affects me</span>
-        <% end %>
+
+        <!-- IT AFFECTS ME BTN-->
+        <button id="toggleButton" onclick="toggleText()" class="btn btn-primary text-white rounded-4 px-4 py-2">
+          <i class="fa-solid fa-triangle-exclamation" style="color: #ffffff;"></i> It affects me</button>
+
 
           <%= link_to incident_comments_path(incident_id: incident.id) do %>
             <button type="button" class="btn btn-light rounded-4 px-4 py-2">
@@ -58,26 +60,20 @@
           });
         });
 
-        document.addEventListener('DOMContentLoaded', function () {
-          const toggleAffectButton = document.getElementById('toggleAffectButton');
-          const toggleText = document.getElementById('toggleText');
+        /*The code below is for the it affects me btn*/
+        let isBtnToggled = false;
 
-        toggleAffectButton.addEventListener('ajax:success', function (event) {
-          const [data, status, xhr] = event.detail;
+        function toggleText() {
+          const button = document.getElementById('toggleButton');
 
-          // Toggle the button text and update the affecting_pins count
-          const isAffected = data['is_affected'];
-          const affectingPinsCount = data['affecting_pins_count'];
-
-          toggleText.innerText = isAffected ? 'It doesn\'t affect me' : 'It affects me';
-
-          // Update the affecting_pins count display (if needed)
-          const affectingPinsCountDisplay = document.getElementById('affectingPinsCount');
-          if (affectingPinsCountDisplay) {
-            affectingPinsCountDisplay.innerText = affectingPinsCount;
+          if (isBtnToggled) {
+            button.innerText = 'It affects me!';
+          } else {
+            button.innerText = 'It doens\'t affect me';
           }
-        });
-      });
+
+          isBtnToggled = !isBtnToggled;
+        }
       </script>
     </div>
     <!-- need to improve line below -->
