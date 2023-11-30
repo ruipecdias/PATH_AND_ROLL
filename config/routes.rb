@@ -14,4 +14,6 @@ Rails.application.routes.draw do
     resources :affecting_pins, only: [:create]
   end
   get '/dashboard', to: 'pages#dashboard', as: 'dashboard'
+
+  patch "toggle_pin/:id", to: "affecting_pins#toggle_pin", as: "toggle_pin"
 end
