@@ -6,18 +6,25 @@
       <div class="d-flex flex-column">
         <p class="m-0"><em><%= incident.affecting_pins.count %>
           <%= 'person'.pluralize(incident.affecting_pins.count) %> affected</em></p>
-        <h2><%= incident.category %></h2>
-        <p><i class="fa-solid fa-location-dot" style="color: #7b7f83;"></i>
-          <%= incident.location %><p>
 
-        <div class="d-flex justify-content-between">
-          <%= link_to incident_affecting_pins_path(incident),
-            method: :post, remote: true, class: 'btn btn-link',
-            id: 'toggleAffectButton' do %>
-            <span id="toggleText" class="btn btn-primary text-white rounded-4 px-4 py-2">
-              <i class="fa-solid fa-triangle-exclamation" style="color: #ffffff;"></i>
-              It affects me</span>
-          <% end %>
+        <p><i class="fa-solid fa-location-dot" style="color: #7b7f83;"></i> <%= incident.location %><p>
+
+        <!-- IT AFFECTS ME BTN-->
+             <%= simple_form_for incident, :url => toggle_pin_path(incident), :method => :patch do |f| %>
+                <% if incident.has_pins_by_user?(current_user) %>
+                  <button type="submit" id="toggleButton" class="btn btn-primary text-white rounded-4 px-4 py-2">
+                    <i class="fa-solid fa-triangle-exclamation" style="color: #ffffff;"></i> It does not affects me
+                  </button>
+                <% else %>
+                  <button type="submit" id="toggleButton" class="btn btn-primary text-white rounded-4 px-4 py-2">
+                    <i class="fa-solid fa-triangle-exclamation" style="color: #ffffff;"></i> It affects me
+                  </button>
+               <% end %>
+             <% end %>
+
+
+
+
           <%= link_to incident_comments_path(incident_id: incident.id) do %>
             <button type="button" class="btn btn-light rounded-4 px-4 py-2">
               <%= incident.comments_count %> <%= 'comment'.pluralize(incident.comments_count) %>
@@ -45,50 +52,6 @@
           </button>
         </div>
       </div>
-
-      <script>
-        document.addEventListener('DOMContentLoaded', function () {
-          const shareButton = document.getElementById('shareButton');
-          const optionsContainer = document.getElementById('optionsContainer');
-          const copyLinkButton = document.getElementById('copyLinkButton');
-
-          shareButton.addEventListener('click', function () {
-            optionsContainer.classList.toggle('show-options');
-          });
-
-          copyLinkButton.addEventListener('click', function () {
-            const incidentUrl = '<%= incident_url(incident) %>';
-            const tempInput = document.createElement('input');
-            document.body.appendChild(tempInput);
-            tempInput.value = incidentUrl;
-            tempInput.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempInput);
-            alert('Link copied to clipboard!');
-          });
-        });
-
-        document.addEventListener('DOMContentLoaded', function () {
-          const toggleAffectButton = document.getElementById('toggleAffectButton');
-          const toggleText = document.getElementById('toggleText');
-
-          toggleAffectButton.addEventListener('ajax:success', function (event) {
-            const [data, status, xhr] = event.detail;
-
-            // Toggle the button text and update the affecting_pins count
-            const isAffected = data['is_affected'];
-            const affectingPinsCount = data['affecting_pins_count'];
-
-            toggleText.innerText = isAffected ? 'It doesn\'t affect me' : 'It affects me';
-
-            // Update the affecting_pins count display (if needed)
-            const affectingPinsCountDisplay = document.getElementById('affectingPinsCount');
-            if (affectingPinsCountDisplay) {
-              affectingPinsCountDisplay.innerText = affectingPinsCount;
-            }
-          });
-        });
-      </script>
     </div>
     <!-- need to improve line below -->
     <p>Is it still there?
