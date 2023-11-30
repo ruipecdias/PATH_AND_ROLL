@@ -11,4 +11,8 @@ class User < ApplicationRecord
   has_many :affecting_pins
   has_many :incidents, through: :affecting_pins
   has_many :incidents
+
+  def affecting_incidents
+    Incident.joins(:affecting_pins).where(affecting_pins: { user_id: id })
+  end
 end
