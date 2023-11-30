@@ -1,4 +1,8 @@
 class IncidentsController < ApplicationController
+  
+  def new
+  end
+
   def show
     @incident = Incident.find(params[:id])
     @markers = [
@@ -8,7 +12,7 @@ class IncidentsController < ApplicationController
         url: incident_path(@incident),
         marker_html: render_to_string(partial: "marker", locals: { incident: @incident })
       }
-    ] 
+    ]
   end
 
   def index
