@@ -1,70 +1,62 @@
-<div class="offcanvas offcanvas-bottom" tabindex="-1"
-id="offcanvasBottom-<%= incident.id %>" aria-labelledby="offcanvasBottomLabel">
-  <div class="offcanvas-header">
+<div class='offcanvas offcanvas-bottom' tabindex='-1' id='offcanvasBottom-<%= incident.id %>' aria-labelledby='offcanvasBottomLabel'>
+  <div class='offcanvas-header'>
   </div>
-  <div class="offcanvas-body small mx-3">
-    <div class="d-flex justify-content-between">
-      <div class="d-flex flex-column">
-        <p class="m-0">
-          <em><%= incident.affecting_pins.count %>
-          <%= 'person'.pluralize(incident.affecting_pins.count) %> affected</em>
-        </p>
-        <h2><%= incident.category %></h2>
-        <p>
-          <i class="fa-solid fa-location-dot" style="color: #7b7f83;"></i> <%= incident.location %>
-        </p>
-        <!-- IT AFFECTS ME BTN-->
-        <div class="d-flex justify-content-between">
-          <%= simple_form_for incident, :url => toggle_pin_path(incident), :method => :patch do |f| %>
-            <% if incident.has_pins_by_user?(current_user) %>
-              <button type="submit" id="toggleButton"
-              class="btn btn-light rounded-4 px-4 py-3 me-2 mb-3"
-              style="color: #FF7900">
-                <i class="fa-solid fa-triangle-exclamation"
-                style="color: #FF7900;"></i>
-                It doesn't
-              </button>
-            <% else %>
-              <button type="submit" id="toggleButton"
-              class="btn btn-primary text-white rounded-4 px-4 py-3 me-2 mb-3">
-                <i class="fa-solid fa-triangle-exclamation"
-                style="color: #ffffff;"></i>
-                It affects me
-              </button>
-            <% end %>
-          <% end %>
-          <%= link_to incident_comments_path(incident_id: incident.id) do %>
-            <button type="button" class="btn btn-light rounded-4 px-4 py-3 ms-2">
-              <%= incident.comments_count %>
-              <%= 'comment'.pluralize(incident.comments_count) %>
-            </button>
-          <% end %>
-        </div>
-      </div>
+  <div class='offcanvas-body small mx-3'>
+    <div class='d-flex justify-content-between'>
+      <!-- People Affected -->
+      <p class='m-0'>
+        <em><%= incident.affecting_pins.count %> <%= 'person'.pluralize(incident.affecting_pins.count) %> affected</em>
+      </p>
       <!-- Share Button with Options -->
-      <div class="share-options">
-        <div class="share-button" id="shareButton">
-          <i class="fa-solid fa-share-nodes" style="color: #7b7f83;"></i>
+      <div class='share-options'>
+        <div class='share-button' id='shareButton'>
+          <i class='fa-solid fa-share-nodes' style='color: #7b7f83;'></i>
         </div>
-        <div class="options-container" id="optionsContainer">
+        <div class='options-container' id='optionsContainer'>
           <!-- WhatsApp Share Button -->
-          <%= link_to "https://api.whatsapp.com/send?text=#{incident_url(incident)}",
-          target: '_blank', title: 'Share on WhatsApp' do %>
-            <i class="fab fa-whatsapp"></i>
+          <%= link_to 'https://api.whatsapp.com/send?text=#{incident_url(incident)}', target: '_blank', title: 'Share on WhatsApp' do %>
+            <i class='fab fa-whatsapp'></i>
           <% end %>
           <!-- Copy Link Button -->
-          <button id="copyLinkButton" title="Copy Link">
-            <i class="far fa-copy"></i>
+          <button id='copyLinkButton' title='Copy Link'>
+            <i class='far fa-copy'></i>
           </button>
         </div>
       </div>
     </div>
-    <!-- need to improve line below -->
-    <p>Is it still there?
-      <button class="option-button btn btn-light rounded-4 py-0"
-      onclick="toggleColor(this)"><small>Yes</small></button>
-      <button class="option-button btn btn-light rounded-4 py-0"
-      onclick="toggleColor(this)"><small>No</small></button>
+    <!-- Title of the incident (category) -->
+    <div class='d-flex flex-column m-0'>
+      <h2><%= incident.category %></h2>
+      <!-- Location -->
+      <div>
+        <i class='fa-solid fa-location-dot mb-3' style='color: #7b7f83;'></i> <%= incident.location %>
+      </div>
+      <!-- IT AFFECTS ME BTN-->
+      <div class='d-flex justify-content-between'>
+        <%= simple_form_for incident, :url => toggle_pin_path(incident), :method => :patch do |f| %>
+          <% if incident.has_pins_by_user?(current_user) %>
+            <button type='submit' id='toggleButton' class='btn btn-light rounded-4 px-4 py-3 mb-3' style='color: #FF7900'>
+              <i class='fa-solid fa-triangle-exclamation' style='color: #FF7900;'></i>
+              It doesn't
+            </button>
+          <% else %>
+            <button type='submit' id='toggleButton' class='btn btn-primary text-white rounded-4 px-4 py-3 mb-3'>
+              <i class='fa-solid fa-triangle-exclamation' style='color: #ffffff;'></i>
+              It affects me
+            </button>
+          <% end %>
+        <% end %>
+        <%= link_to incident_comments_path(incident_id: incident.id) do %>
+          <button type='button' class='btn btn-light rounded-4 px-4 py-3'>
+            <%= incident.comments.count %> <%= 'comment'.pluralize(incident.comments_count) %>
+          </button>
+        <% end %>
+      </div>
+    </div>
+    <!-- Is it still there? -->
+    <p class='mt-0'>Is it still there?
+      <button class='option-button btn btn-light rounded-4 py-0' onclick='toggleColor(this)'><small>Yes</small></button>
+      <button class='option-button btn btn-light rounded-4 py-0' onclick='toggleColor(this)'><small>No</small></button>
     </p>
     <script>
       function toggleColor(clickedButton) {
