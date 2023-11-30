@@ -15,4 +15,7 @@ class Incident < ApplicationRecord
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
 
+  def has_pins_by_user?(user)
+    self.affecting_pins.where(user: user).present?
+  end
 end

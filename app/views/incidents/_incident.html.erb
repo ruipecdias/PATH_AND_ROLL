@@ -10,20 +10,20 @@
         <p><i class="fa-solid fa-location-dot" style="color: #7b7f83;"></i> <%= incident.location %><p>
 
         <!-- IT AFFECTS ME BTN-->
-        <button id="toggleButton" onclick="toggleText()" class="btn btn-primary text-white rounded-4 px-4 py-2">
-          <i class="fa-solid fa-triangle-exclamation" style="color: #ffffff;"></i> It affects me</button>
+             <%= simple_form_for incident, :url => toggle_pin_path(incident), :method => :patch do |f| %>
+                <% if incident.has_pins_by_user?(current_user) %>
+                  <button type="submit" id="toggleButton" class="btn btn-primary text-white rounded-4 px-4 py-2">
+                    <i class="fa-solid fa-triangle-exclamation" style="color: #ffffff;"></i> It does not affects me
+                  </button>
+                <% else %>
+                  <button type="submit" id="toggleButton" class="btn btn-primary text-white rounded-4 px-4 py-2">
+                    <i class="fa-solid fa-triangle-exclamation" style="color: #ffffff;"></i> It affects me
+                  </button>
+               <% end %>
+             <% end %>
 
 
-          
-        <div class="d-flex justify-content-between">
-          <%= link_to incident_affecting_pins_path(incident),
-            method: :post, remote: true, class: 'btn btn-link',
-            id: 'toggleAffectButton' do %>
-            <span id="toggleText" class="btn btn-primary text-white rounded-4 px-4 py-2">
-              <i class="fa-solid fa-triangle-exclamation" style="color: #ffffff;"></i>
-              It affects me</span>
-          <% end %>
-          
+
           <%= link_to incident_comments_path(incident_id: incident.id) do %>
             <button type="button" class="btn btn-light rounded-4 px-4 py-2">
               <%= incident.comments_count %> <%= 'comment'.pluralize(incident.comments_count) %>
@@ -51,44 +51,6 @@
           </button>
         </div>
       </div>
-
-      <script>
-        document.addEventListener('DOMContentLoaded', function () {
-          const shareButton = document.getElementById('shareButton');
-          const optionsContainer = document.getElementById('optionsContainer');
-          const copyLinkButton = document.getElementById('copyLinkButton');
-
-          shareButton.addEventListener('click', function () {
-            optionsContainer.classList.toggle('show-options');
-          });
-
-          copyLinkButton.addEventListener('click', function () {
-            const incidentUrl = '<%= incident_url(incident) %>';
-            const tempInput = document.createElement('input');
-            document.body.appendChild(tempInput);
-            tempInput.value = incidentUrl;
-            tempInput.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempInput);
-            alert('Link copied to clipboard!');
-          });
-        });
-
-        /*The code below is for the it affects me btn*/
-        let isBtnToggled = false;
-
-        function toggleText() {
-          const button = document.getElementById('toggleButton');
-
-          if (isBtnToggled) {
-            button.innerText = 'It affects me!';
-          } else {
-            button.innerText = 'It doens\'t affect me';
-          }
-
-          isBtnToggled = !isBtnToggled;
-
-      </script>
     </div>
     <!-- need to improve line below -->
     <p>Is it still there? Yes No</p>
