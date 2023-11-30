@@ -46,12 +46,14 @@ locations.each_with_index do |location, index|
                   "A structural issue was noticed in a building near #{location}, causing concern for passersby."
                 end
 
+                uploaded_image = Cloudinary::Uploader.upload(imgurls[index])
+
   Incident.create!(
     user: users.sample,
     location: location,
     category: category,
     description: description,
-    img_url: imgurls[index], # Replace with actual image URLs
+    img_url: uploaded_image['url'], # Replace with actual image URLs
     status: [true, false].sample
   )
 end

@@ -80,3 +80,4 @@ gem 'faker', '~> 2.18'
 
 gem 'geocoder'
 
+gem 'cloudinary'
