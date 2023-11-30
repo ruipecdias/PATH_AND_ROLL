@@ -1,51 +1,57 @@
-<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom-<%= incident.id %>" aria-labelledby="offcanvasBottomLabel">
+<div class="offcanvas offcanvas-bottom" tabindex="-1"
+id="offcanvasBottom-<%= incident.id %>" aria-labelledby="offcanvasBottomLabel">
   <div class="offcanvas-header">
   </div>
   <div class="offcanvas-body small mx-3">
     <div class="d-flex justify-content-between">
       <div class="d-flex flex-column">
-        <p class="m-0"><em><%= incident.affecting_pins.count %>
-          <%= 'person'.pluralize(incident.affecting_pins.count) %> affected</em></p>
-
-        <p><i class="fa-solid fa-location-dot" style="color: #7b7f83;"></i> <%= incident.location %><p>
-
+        <p class="m-0">
+          <em><%= incident.affecting_pins.count %>
+          <%= 'person'.pluralize(incident.affecting_pins.count) %> affected</em>
+        </p>
+        <h2><%= incident.category %></h2>
+        <p>
+          <i class="fa-solid fa-location-dot" style="color: #7b7f83;"></i> <%= incident.location %>
+        </p>
         <!-- IT AFFECTS ME BTN-->
-             <%= simple_form_for incident, :url => toggle_pin_path(incident), :method => :patch do |f| %>
-                <% if incident.has_pins_by_user?(current_user) %>
-                  <button type="submit" id="toggleButton" class="btn btn-primary text-white rounded-4 px-4 py-2">
-                    <i class="fa-solid fa-triangle-exclamation" style="color: #ffffff;"></i> It does not affects me
-                  </button>
-                <% else %>
-                  <button type="submit" id="toggleButton" class="btn btn-primary text-white rounded-4 px-4 py-2">
-                    <i class="fa-solid fa-triangle-exclamation" style="color: #ffffff;"></i> It affects me
-                  </button>
-               <% end %>
-             <% end %>
-
-
-
-
+        <div class="d-flex justify-content-between">
+          <%= simple_form_for incident, :url => toggle_pin_path(incident), :method => :patch do |f| %>
+            <% if incident.has_pins_by_user?(current_user) %>
+              <button type="submit" id="toggleButton"
+              class="btn btn-light rounded-4 px-4 py-3 me-2 mb-3"
+              style="color: #FF7900">
+                <i class="fa-solid fa-triangle-exclamation"
+                style="color: #FF7900;"></i>
+                It doesn't
+              </button>
+            <% else %>
+              <button type="submit" id="toggleButton"
+              class="btn btn-primary text-white rounded-4 px-4 py-3 me-2 mb-3">
+                <i class="fa-solid fa-triangle-exclamation"
+                style="color: #ffffff;"></i>
+                It affects me
+              </button>
+            <% end %>
+          <% end %>
           <%= link_to incident_comments_path(incident_id: incident.id) do %>
-            <button type="button" class="btn btn-light rounded-4 px-4 py-2">
-              <%= incident.comments_count %> <%= 'comment'.pluralize(incident.comments_count) %>
+            <button type="button" class="btn btn-light rounded-4 px-4 py-3 ms-2">
+              <%= incident.comments_count %>
+              <%= 'comment'.pluralize(incident.comments_count) %>
             </button>
           <% end %>
         </div>
-
       </div>
-
       <!-- Share Button with Options -->
       <div class="share-options">
         <div class="share-button" id="shareButton">
           <i class="fa-solid fa-share-nodes" style="color: #7b7f83;"></i>
         </div>
-
         <div class="options-container" id="optionsContainer">
           <!-- WhatsApp Share Button -->
-          <%= link_to "https://api.whatsapp.com/send?text=#{incident_url(incident)}", target: '_blank', title: 'Share on WhatsApp' do %>
+          <%= link_to "https://api.whatsapp.com/send?text=#{incident_url(incident)}",
+          target: '_blank', title: 'Share on WhatsApp' do %>
             <i class="fab fa-whatsapp"></i>
           <% end %>
-
           <!-- Copy Link Button -->
           <button id="copyLinkButton" title="Copy Link">
             <i class="far fa-copy"></i>
@@ -55,10 +61,11 @@
     </div>
     <!-- need to improve line below -->
     <p>Is it still there?
-      <button class="option-button btn btn-light rounded-4 py-0" onclick="toggleColor(this)"><small>Yes</small></button>
-      <button class="option-button btn btn-light rounded-4 py-0" onclick="toggleColor(this)"><small>No</small></button>
+      <button class="option-button btn btn-light rounded-4 py-0"
+      onclick="toggleColor(this)"><small>Yes</small></button>
+      <button class="option-button btn btn-light rounded-4 py-0"
+      onclick="toggleColor(this)"><small>No</small></button>
     </p>
-
     <script>
       function toggleColor(clickedButton) {
         const buttons = document.querySelectorAll('.option-button');
@@ -66,21 +73,18 @@
         buttons.forEach(button => {
           if (button === clickedButton) {
             // Toggle color for the clicked button
-            button.style.color = button.style.color === 'orange' ? 'gray' : 'orange';
-            button.style.backgroundColor = button.style.backgroundColor === '#FFE9D6' ? 'gray' : '#FFE9D6';
+            button.style.color = button.style.color === 'orange' ? 'black' : 'orange';
+            button.style.backgroundColor = button.style.backgroundColor === '#FFE9D6' ? 'black' : '#FFE9D6';
             button.style.border = button.style.border === '1px solid #ddd' ? 'none' : '1px solid #ddd';
-
-
           } else {
             // Reset color for the other buttons
-            button.style.color = 'gray';
+            button.style.color = 'black';
             button.style.backgroundColor = 'white';
             button.style.border = '1px solid #ddd';
           }
         });
       }
     </script>
-
     <p><%= incident.description %></p>
     <%= image_tag incident.img_url, alt: 'Incident Image', class: 'w-50' %>
   </div>
