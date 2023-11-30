@@ -1,26 +1,26 @@
-<div class="dashboard">
-  <h1>Hi <%= current_user.first_name %></h1>
-  <h2>Check how is your area today</h2>
-
-  <h3>In Your Area</h3>
-<div id='map' style='width: 100%; height: 100vh;'
-  data-controller="map"
-  data-map-markers-value="<%= @markers.to_json %>"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+<div>
+  <div style='margin-top: 20px; margin-left: 20px;'>
+    <h2>Hi <%= current_user.first_name %></h2>
+    <p style='color: #7b7f83;'>Check how's your area today</p>
+  </div>
+  <div id='map' style='width: 90%; height: 25vh; border-radius: 5%; margin-left: auto; margin-right: auto;'
+    data-controller="map"
+    data-map-markers-value="<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
 
   <h3>Incidents Affecting You</h3>
   <a href="<%= incidents_path %>" class="see-all">See all</a>
   <ul>
     <%# Loop through incidents affecting the user %>
- <% if @affecting_incidents.present? %>
-  <ul>
-    <% @affecting_incidents.take(3).each do |incident| %>
-      <li><%= incident.description %></li>
-    <% end %>
+    <% if @affecting_incidents.present? %>
+      <% @affecting_incidents.take(3).each do |incident| %>
+        <li><%= incident.description %></li>
+      <% end %>
   </ul>
-<% else %>
-  <p>No incidents to display.</p>
-<% end %>
+  <% else %>
+    <p>No incidents to display.</p>
+  <% end %>
 
   <h3>Your Reported Incidents</h3>
   <%# <a href="<%= user_incidents_path(current_user) " class="see-all">See all</a> % %>

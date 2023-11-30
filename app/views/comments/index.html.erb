@@ -5,6 +5,7 @@
 <h2>Comments</h2>
 <p><%= @comments.count %> comments</p>
 
+
   <% @comments.each do |comment| %>
     <div class="mt-2 p-2">
         <div class="d-flex justify-content-between">
@@ -24,7 +25,7 @@
         </div>
     </div>
   <% end %>
-
+  
   <%# Form %>
   <div class="mt-3">
     <%= form_with(model: [@incident, Comment.new], local: true) do |form| %>
@@ -40,3 +41,11 @@
     </div>
   </div>
 </div>
+
+<h3>Write a Comment</h3>
+<%= form_with(model: [@incident, Comment.new], local: true) do |form| %>
+  <%= form.text_area :content, required: true %><br>
+  <%= form.label :img_url, "Upload a photo:" %>
+  <%= form.file_field :img_url %><br>
+  <%= form.submit "Submit" %>
+<% end %>
