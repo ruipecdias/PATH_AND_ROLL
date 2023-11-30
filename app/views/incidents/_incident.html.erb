@@ -7,7 +7,7 @@
         <p><%= incident.affecting_pins.count %> <%= 'person'.pluralize(incident.affecting_pins.count) %> affected</p>
         <h2><%= incident.category %></h2>
         <p><i class="fa-solid fa-location-dot" style="color: #7b7f83;"></i> <%= incident.location %><p>
-        <%= link_to incident_affecting_pins_path(incident), method: :post, remote: true, class: 'btn btn-link', id: 'toggleAffectButton' do %>
+        <%= method: :post, remote: true, class: 'btn btn-link', id: 'toggleAffectButton' do %>
         <span id="toggleText" class="btn btn-primary text-white rounded-4 px-4 py-2"><i class="fa-solid fa-triangle-exclamation" style="color: #ffffff;"></i> It affects me</span>
         <% end %>
 
