@@ -9,7 +9,7 @@
         <h2><%= incident.category %></h2>
         <p><i class="fa-solid fa-location-dot" style="color: #7b7f83;"></i>
           <%= incident.location %><p>
-          
+
         <div class="d-flex justify-content-between">
           <%= link_to incident_affecting_pins_path(incident),
             method: :post, remote: true, class: 'btn btn-link',
@@ -91,8 +91,34 @@
       </script>
     </div>
     <!-- need to improve line below -->
-    <p>Is it still there? Yes No</p>
-    <p><strong>Description:</strong> <%= incident.description %></p>
+    <p>Is it still there?
+      <button class="option-button btn btn-light rounded-4 py-0" onclick="toggleColor(this)"><small>Yes</small></button>
+      <button class="option-button btn btn-light rounded-4 py-0" onclick="toggleColor(this)"><small>No</small></button>
+    </p>
+
+    <script>
+      function toggleColor(clickedButton) {
+        const buttons = document.querySelectorAll('.option-button');
+
+        buttons.forEach(button => {
+          if (button === clickedButton) {
+            // Toggle color for the clicked button
+            button.style.color = button.style.color === 'orange' ? 'gray' : 'orange';
+            button.style.backgroundColor = button.style.backgroundColor === '#FFE9D6' ? 'gray' : '#FFE9D6';
+            button.style.border = button.style.border === '1px solid #ddd' ? 'none' : '1px solid #ddd';
+
+
+          } else {
+            // Reset color for the other buttons
+            button.style.color = 'gray';
+            button.style.backgroundColor = 'white';
+            button.style.border = '1px solid #ddd';
+          }
+        });
+      }
+    </script>
+
+    <p><%= incident.description %></p>
     <%= image_tag incident.img_url, alt: 'Incident Image', class: 'w-50' %>
   </div>
 </div>
