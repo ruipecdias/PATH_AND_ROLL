@@ -4,20 +4,30 @@
   <div class="offcanvas-body small mx-3">
     <div class="d-flex justify-content-between">
       <div class="d-flex flex-column">
-        <p><%= incident.affecting_pins.count %> <%= 'person'.pluralize(incident.affecting_pins.count) %> affected</p>
+        <p class="m-0"><em><%= incident.affecting_pins.count %>
+          <%= 'person'.pluralize(incident.affecting_pins.count) %> affected</em></p>
         <h2><%= incident.category %></h2>
-        <p><i class="fa-solid fa-location-dot" style="color: #7b7f83;"></i> <%= incident.location %><p>
-        <%= method: :post, remote: true, class: 'btn btn-link', id: 'toggleAffectButton' do %>
-        <span id="toggleText" class="btn btn-primary text-white rounded-4 px-4 py-2"><i class="fa-solid fa-triangle-exclamation" style="color: #ffffff;"></i> It affects me</span>
-        <% end %>
-
+        <p><i class="fa-solid fa-location-dot" style="color: #7b7f83;"></i>
+          <%= incident.location %><p>
+          
+        <div class="d-flex justify-content-between">
+          <%= link_to incident_affecting_pins_path(incident),
+            method: :post, remote: true, class: 'btn btn-link',
+            id: 'toggleAffectButton' do %>
+            <span id="toggleText" class="btn btn-primary text-white rounded-4 px-4 py-2">
+              <i class="fa-solid fa-triangle-exclamation" style="color: #ffffff;"></i>
+              It affects me</span>
+          <% end %>
           <%= link_to incident_comments_path(incident_id: incident.id) do %>
             <button type="button" class="btn btn-light rounded-4 px-4 py-2">
               <%= incident.comments_count %> <%= 'comment'.pluralize(incident.comments_count) %>
             </button>
           <% end %>
+        </div>
+
       </div>
-                <!-- Share Button with Options -->
+
+      <!-- Share Button with Options -->
       <div class="share-options">
         <div class="share-button" id="shareButton">
           <i class="fa-solid fa-share-nodes" style="color: #7b7f83;"></i>
@@ -62,28 +72,27 @@
           const toggleAffectButton = document.getElementById('toggleAffectButton');
           const toggleText = document.getElementById('toggleText');
 
-        toggleAffectButton.addEventListener('ajax:success', function (event) {
-          const [data, status, xhr] = event.detail;
+          toggleAffectButton.addEventListener('ajax:success', function (event) {
+            const [data, status, xhr] = event.detail;
 
-          // Toggle the button text and update the affecting_pins count
-          const isAffected = data['is_affected'];
-          const affectingPinsCount = data['affecting_pins_count'];
+            // Toggle the button text and update the affecting_pins count
+            const isAffected = data['is_affected'];
+            const affectingPinsCount = data['affecting_pins_count'];
 
-          toggleText.innerText = isAffected ? 'It doesn\'t affect me' : 'It affects me';
+            toggleText.innerText = isAffected ? 'It doesn\'t affect me' : 'It affects me';
 
-          // Update the affecting_pins count display (if needed)
-          const affectingPinsCountDisplay = document.getElementById('affectingPinsCount');
-          if (affectingPinsCountDisplay) {
-            affectingPinsCountDisplay.innerText = affectingPinsCount;
-          }
+            // Update the affecting_pins count display (if needed)
+            const affectingPinsCountDisplay = document.getElementById('affectingPinsCount');
+            if (affectingPinsCountDisplay) {
+              affectingPinsCountDisplay.innerText = affectingPinsCount;
+            }
+          });
         });
-      });
       </script>
     </div>
     <!-- need to improve line below -->
-      <p>Is it still there? Yes No</p>
-      <p><strong>Description:</strong> <%= incident.description %></p>
-      <%= image_tag incident.img_url, alt: 'Incident Image', class: 'w-100' %>
-
+    <p>Is it still there? Yes No</p>
+    <p><strong>Description:</strong> <%= incident.description %></p>
+    <%= image_tag incident.img_url, alt: 'Incident Image', class: 'w-50' %>
   </div>
 </div>
