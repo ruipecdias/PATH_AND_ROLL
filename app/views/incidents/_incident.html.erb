@@ -9,7 +9,7 @@
         <h2><%= incident.category %></h2>
         <p><i class="fa-solid fa-location-dot" style="color: #7b7f83;"></i>
           <%= incident.location %><p>
-
+          
         <div class="d-flex justify-content-between">
           <%= link_to incident_affecting_pins_path(incident),
             method: :post, remote: true, class: 'btn btn-link',
