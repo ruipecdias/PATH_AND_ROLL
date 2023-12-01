@@ -9,9 +9,14 @@
   <% @comments.each do |comment| %>
     <div class="mt-2 p-2">
         <div class="d-flex justify-content-between">
-        <img src="https://via.placeholder.com/150"
-        alt="<%= comment.user.first_name %> profile"
-        style="width: 50px; height: 50px; border-radius: 50%;">
+          <% if comment.user.photo.key.nil? %>
+            <img src="https://via.placeholder.com/150"
+              alt="<%= comment.user.first_name %> profile"
+              style="width: 50px; height: 50px; border-radius: 50%;">
+          <% else %>
+            <%= cl_image_tag comment.user.photo.key, style: "width: 50px; height: 50px; border-radius: 50%;" %>
+          <% end %>
+
       <span><small><%= time_ago_in_words(comment.created_at) %> ago</small></span>
       </div>
         <div class="ms-2 ps-5">
@@ -20,8 +25,8 @@
           <p><%= comment.content %></p>
           </div>
           <% if comment.img_url.present? %>
-            <!-- img src="<%= comment.img_url %>" alt="Comment image" style="max-width: 200px; height: auto;"-->
-            <%= cl_image_tag comment.user.photo.key style: "max-width: 200px; height: auto;" %>
+            <img src="<%= comment.img_url %>" alt="Comment image" style="max-width: 200px; height: auto;">
+            <%#= cl_image_tag comment.user.photo.key style: "max-width: 200px; height: auto;" %>
           <% end %>
         </div>
     </div>
