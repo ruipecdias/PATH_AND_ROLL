@@ -33,12 +33,14 @@
         </div>
     <% end %>
     <% else %>
-      <p style='color: gray'><em>No incidents to display.<em></p>
+      <p style='color: gray'><em>No incidents to display.</em></p>
     <% end %>
 
-  <br>
+  <div class='mt-3'>
+  <div class='d-flex justify-content-between'>
   <h3>Your Reported Incidents</h3>
-
+    <a href="<%= incidents_path %>" class="see-all">see all</a>
+  </div>
     <%# Loop through incidents reported by the user %>
     <% if @reported_incidents.present? %>
     <% @reported_incidents.take(3).each do |incident| %>
@@ -52,9 +54,10 @@
      </div>
     <% end %>
     <% else %>
-     <p style='color: gray'><em>You haven't reported any incident yet.<em></p>
+     <p style='color: gray'><em>You haven't reported any incident yet.</em></p>
     <% end %>
   <div>
+</div>
 </div>
 </div>
 </div>
