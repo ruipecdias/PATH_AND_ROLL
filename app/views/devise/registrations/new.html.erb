@@ -45,6 +45,11 @@
                   input_html: { autocomplete: "new-password" },
                   label: false,
                   wrapper_html: { class: 'rounded-input' } %>
+      <%= f.input :photo,
+                  as: :file,
+                  required: true,
+                  label: 'Upload Profile Picture',
+                  input_html: { autocomplete: "off" } %>
     </div>
     <br>
     <div class="form-actions d-flex justify-content-center">

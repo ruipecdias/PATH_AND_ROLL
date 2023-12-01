@@ -1,6 +1,18 @@
 class IncidentsController < ApplicationController
   
   def new
+    @incident = Incident.new
+  end
+
+  def create
+    @incident = Incident.new(incident_params)
+    @incident.user = current_user 
+  
+    if @incident.save
+      redirect_to incident_path(@incident), notice: 'Incident was successfully created.'
+    else
+      render :new
+    end
   end
 
   def show
@@ -29,4 +41,10 @@ class IncidentsController < ApplicationController
     end
   end
 
+end
+
+private
+
+def incident_params
+  params.require(:incident).permit(:location, :category, :description, :status, photos: [])
 end
