@@ -90,7 +90,7 @@ end
 new_incident = Incident.create!(
   user: users.sample,
   location: 'New Location, Lisbon',
-  category: 'Accident',
+  category: 'Construction',
   description: 'A new incident description.',
   img_url: additional_img_urls_uploaded.join(', '), # Storing the URLs as a comma-separated string
   status: [true, false].sample
