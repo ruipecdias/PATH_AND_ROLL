@@ -21,6 +21,7 @@
           </div>
           <% if comment.img_url.present? %>
             <img src="<%= comment.img_url %>" alt="Comment image" style="max-width: 200px; height: auto;">
+            <%#= cl_image_tag comment.user.photo.key style: "max-width: 200px; height: auto;" %>
           <% end %>
         </div>
     </div>
