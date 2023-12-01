@@ -8,12 +8,11 @@
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 
-  <h3>Incidents Affecting You</h3>
+  <h2>Incidents Affecting You</h2>
   <a href="<%= incidents_path %>" class="see-all">See all</a>
   <ul>
     <%# Loop through incidents affecting the user %>
  <% if @affecting_incidents.present? %>
-  <ul>
     <% @affecting_incidents.take(3).each do |incident| %>
       <li><%= incident.description %></li>
     <% end %>
@@ -22,12 +21,7 @@
   <p>No incidents to display.</p>
 <% end %>
 
-  <h3>Your Reported Incidents</h3>
+<h2>Your Reported Incidents</h2>
   <%# <a href="<%= user_incidents_path(current_user) " class="see-all">See all</a> % %>
-  <ul>
-    <%# Loop through incidents reported by the user %>
-    <% @reported_incidents.take(3).each do |incident| %>
-      <li><%= incident.description %></li>
-    <% end %>
-  </ul>
+  <p>No incidents to display.</p>
 </div>

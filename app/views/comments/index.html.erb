@@ -17,10 +17,11 @@
   <% end %>
 </ul>
 
-<h3>Write a Comment</h3>
 <%= form_with(model: [@incident, Comment.new], local: true) do |form| %>
   <%= form.text_area :content, required: true %><br>
+
   <%= form.label :img_url, "Upload a photo:" %>
-  <%= form.file_field :img_url %><br>
+  <%= form.file_field :img_url, class: "custom-file-input" %><br>
+
   <%= form.submit "Submit" %>
 <% end %>

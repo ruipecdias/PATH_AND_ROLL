@@ -1,3 +1,5 @@
+require 'open-uri'
+
 AffectingPin.destroy_all
 Comment.destroy_all
 Incident.destroy_all
@@ -22,14 +24,14 @@ locations = [
   'Santa Justa Lift, Lisbon', 'Campo de Ourique, Lisbon'
 ]
 imgurls =[
-  "https://static.globalnoticias.pt/jn/image.jpg?brand=jn&type=generate&guid=9da83dba-af20-451a-a363-2b6ffe6083c6",
+  "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/NES-Console-Set.jpg/1200px-NES-Console-Set.jpg",
   "https://c8.alamy.com/comp/J2690X/a-workman-repairing-a-cobbled-street-in-lisbon-portugal-J2690X.jpg",
-  "https://media.gettyimages.com/id/1245458040/photo/workers-remove-muddy-watter-from-a-street-after-being-affected-by-a-flood-in-lisbon-on.jpg?s=612x612&w=gi&k=20&c=f4bvfn-rqlE2oynbf_6kHf_NoSBl3I-gLc9iAWONjPE=",
+  "https://www.imago-images.com/bild/st/0108710651/s.jpg",
   "https://www.imago-images.com/bild/st/0108710651/s.jpg",
   "https://sol.sapo.pt/wp-content/uploads/2023/07/sol2017313573785-scaled.jpg",
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTznyebFH1Tp536GywZ8oQAfqrKFsNLDtQjlYRlEvdymGYRPyzZJZ0agt-APFSIFG6z9DE&usqp=CAU",
+  "https://sol.sapo.pt/wp-content/uploads/2023/07/sol2017313573785-scaled.jpg",
   "https://media.euobserver.com/4f9aca9d7719ffe55bfa7ee21c52ff16.jpg",
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGZjlDxfJ5pdp3raMh04sgqKaPui6WesP23Q&usqp=CAU",
+  "https://sol.sapo.pt/wp-content/uploads/2023/07/sol2017313573785-scaled.jpg",
   "https://gibb.pt/wp-content/uploads/2017/09/IC17-%E2%80%93-CRIL-Sublan%C3%A7o-Buraca-Pontinha-%E2%80%93-Trabalhos-Complementares-%E2%80%93-Reposi%C3%A7%C3%A3o-do-Caneiro-da-Damaia-300x225.jpg",
   "https://lisboaparapessoas.pt/wp-content/uploads/2022/11/cicloviaseteriosemel_06.jpg"
 
@@ -46,17 +48,19 @@ locations.each_with_index do |location, index|
                   "A structural issue was noticed in a building near #{location}, causing concern for passersby."
                 end
 
-                uploaded_image = Cloudinary::Uploader.upload(imgurls[index])
+                #uploaded_image = Cloudinary::Uploader.upload(imgurls[index])
 
-  Incident.create!(
+  incident = Incident.create!(
     user: users.sample,
     location: location,
     category: category,
     description: description,
-    img_url: uploaded_image['url'], # Replace with actual image URLs
+    #img_url: uploaded_image['url'], # Replace with actual image URLs
     status: [true, false].sample
   )
-end
+    file = URI.open("https://sol.sapo.pt/wp-content/uploads/2023/07/sol2017313573785-scaled.jpg")
+    incident.photos.attach(io: file, filename: "location_#{index}.jpg", content_type: 'image/jpg')
+  end
 
 incidents = Incident.all
 
@@ -86,7 +90,7 @@ end
 new_incident = Incident.create!(
   user: users.sample,
   location: 'New Location, Lisbon',
-  category: 'New Category',
+  category: 'Accident',
   description: 'A new incident description.',
   img_url: additional_img_urls_uploaded.join(', '), # Storing the URLs as a comma-separated string
   status: [true, false].sample
