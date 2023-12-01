@@ -4,7 +4,7 @@
   <div class='offcanvas-body small mx-3'>
     <div class='d-flex justify-content-between'>
       <!-- People Affected -->
-      <p class='m-0'>
+      <p class='m-0' style='color: #FF7900'>
         <em><%= incident.affecting_pins.count %> <%= 'person'.pluralize(incident.affecting_pins.count) %> affected</em>
       </p>
       <!-- Share Button with Options -->
@@ -25,14 +25,22 @@
       </div>
     </div>
     <!-- Title of the incident (category) -->
-    <div class='d-flex flex-column m-0'>
-      <h2><%= incident.category %></h2>
+    <div class='d-flex flex-column'>
+      <h2 class='mb-0'><%= incident.category %></h2>
       <!-- Location -->
       <div>
-        <i class='fa-solid fa-location-dot mb-3' style='color: #7b7f83;'></i> <%= incident.location %>
+        <i class='fa-solid fa-location-dot' style='color: #7b7f83;'></i> <%= incident.location %>
+      </div>
+      <!-- Date -->
+      <div class="mt-0">
+      <i class="fa-solid fa-calendar-plus"></i>
+      Reported on
+        <%= incident.created_at.strftime('%d') %>
+        <%= incident.created_at.strftime('%B') %>
+        <%= incident.created_at.strftime('%Y') %>
       </div>
       <!-- IT AFFECTS ME BTN-->
-      <div class='d-flex justify-content-between'>
+      <div class='d-flex justify-content-between mt-3'>
         <%= simple_form_for incident, :url => toggle_pin_path(incident), :method => :patch do |f| %>
           <% if incident.has_pins_by_user?(current_user) %>
             <button type='submit' id='toggleButton' class='btn btn-light rounded-4 px-4 py-3 mb-3' style='color: #FF7900'>
@@ -55,8 +63,10 @@
     </div>
     <!-- Is it still there? -->
     <p class='mt-0'>Is it still there?
-      <button class='option-button btn btn-light rounded-4 py-0' onclick='toggleColor(this)'><small>Yes</small></button>
-      <button class='option-button btn btn-light rounded-4 py-0' onclick='toggleColor(this)'><small>No</small></button>
+      <button class='option-button btn btn-light rounded-4 py-0'
+      onclick='toggleColor(this)'><small>Yes</small></button>
+      <button class='option-button btn btn-light rounded-4 py-0'
+      onclick='toggleColor(this)'><small>No</small></button>
     </p>
     <script>
       function toggleColor(clickedButton) {
