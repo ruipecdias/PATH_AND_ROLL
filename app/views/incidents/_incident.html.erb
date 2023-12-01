@@ -89,6 +89,8 @@
       }
     </script>
     <p><%= incident.description %></p>
-    <%= image_tag incident.img_url, alt: 'Incident Image', class: 'w-50' %>
+    <% incident.photos.each do |photo| %>
+  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %> <!-- Adjust size as needed -->
+<% end %>
   </div>
 </div>
