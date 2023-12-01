@@ -79,14 +79,5 @@ locations.each_with_index do |location, index|
 end
 
 # Create Comments for each Incident
-Incident.all.each do |incident|
-  rand(5..10).times do
-    Comment.create!(
-      user: users.sample,
-      incident: incident,
-      content: Faker::Lorem.sentence
-    )
-  end
-end
 
 puts "Seeding completed!"
