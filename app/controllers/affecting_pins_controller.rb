@@ -4,15 +4,14 @@ class AffectingPinsController < ApplicationController
   def toggle_pin
     @incident = Incident.find(params[:id])
     @affecting_pin = @incident.affecting_pins.find_or_initialize_by(user: current_user)
-
     if @affecting_pin.persisted?
       @affecting_pin.destroy
       is_affected = false
-      redirect_to incidents_path
+      redirect_to incidents_path(last_incident_id: @incident.id)
     else
       @affecting_pin.save
       is_affected = true
-      redirect_to incidents_path
+      redirect_to incidents_path(last_incident_id: @incident.id)
     end
   end
 end
