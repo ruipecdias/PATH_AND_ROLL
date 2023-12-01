@@ -25,13 +25,37 @@ locations = [
 ]
 
 # Safe image URLs for Cloudinary
-imgurl = "https://c8.alamy.com/comp/J2690X/a-workman-repairing-a-cobbled-street-in-lisbon-portugal-J2690X.jpg"
+
+imgurls =[
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701366720/hzx0n0imr2wx0nbqvfvc.jpg",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701366718/wj1oslsnfrv6rearwgfp.jpg",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701366717/tklbcdn3tzf9wc1omqwq.jpg",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701366716/al1f1zln67d88uvqnoh8.jpg",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701366715/tvyw5lplhymmdesixo4n.jpg",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701366713/cvtmufvmwf8zpbesoo2e.jpg",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701366711/wr2v5lzdfpfee7tuewpv.jpg",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701366710/iwaxudgt5xp7xjhehmbi.jpg",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701366709/xwnf3shf7jp9fiqueyms.jpg",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701364904/gqvmcdswtua5dytv5zne.jpg"
+]
+
+
+
+
+imgurl = "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701366717/tklbcdn3tzf9wc1omqwq.jpg"
 additional_imgurl = "https://gibb.pt/wp-content/uploads/2017/09/IC17-%E2%80%93-CRIL-Sublan%C3%A7o-Buraca-Pontinha-%E2%80%93-Trabalhos-Complementares-%E2%80%93-Reposi%C3%A7%C3%A3o-do-Caneiro-da-Damaia-300x225.jpg"
 
 # Create Incidents
 locations.each_with_index do |location, index|
   category = ['Accident', 'Construction', 'Structural'].sample
-  description = "An incident occurred near #{location}, requiring attention."
+  description = case category
+  when 'Accident'
+    "Today, as I walked by #{location}, I witnessed a shocking accident. The scene was chaotic, and emergency services were on their way."
+  when 'Construction'
+    "I noticed some construction work happening at #{location}. It looks like they're repairing the road, causing some traffic delays."
+  when 'Structural'
+    "There's a building near #{location} that seems to be undergoing some structural issues. It caught my attention due to the safety concerns it poses."
+  end
 
   incident = Incident.create!(
     user: users.sample,
@@ -42,7 +66,7 @@ locations.each_with_index do |location, index|
   )
 
   # Attach one or two images to the incident
-  file = URI.open(imgurl)
+  file = URI.open(imgurls[index])
   incident.photos.attach(io: file, filename: "location_#{index}.jpg", content_type: 'image/jpg')
 
   # For the first incident, add an additional image
