@@ -89,8 +89,29 @@
       }
     </script>
     <p><%= incident.description %></p>
-    <% incident.photos.each do |photo| %>
-  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %> <!-- Adjust size as needed -->
-<% end %>
+    <!-- Existing code above -->
+
+<!-- Add Bootstrap Carousel for Incident Photos -->
+<div class="d-flex justify-content-center">
+  <div id="incidentCarousel" class="carousel slide mb-3" data-bs-ride="carousel" style="width: 300px">
+    <div class="carousel-inner">
+      <% incident.photos.each_with_index do |photo, index| %>
+        <div class="carousel-item <%= index.zero? ? 'active' : '' %>">
+          <%= cl_image_tag photo.key, height: 200, width: 300, crop: :fill, class: 'd-block rounded-4' %>
+        </div>
+      <% end %>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#incidentCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#incidentCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+
+
   </div>
 </div>
