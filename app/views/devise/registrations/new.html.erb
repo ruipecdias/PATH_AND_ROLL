@@ -48,8 +48,9 @@
       <%= f.input :photo,
                   as: :file,
                   required: true,
-                  label: 'Upload Profile Picture',
-                  input_html: { autocomplete: "off" } %>
+                  input_html: { autocomplete: "off" },
+                  wrapper_html: { class: 'rounded-input' },
+                  label: false %>
     </div>
     <br>
     <div class="form-actions d-flex justify-content-center">
