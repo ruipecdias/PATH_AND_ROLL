@@ -10,7 +10,6 @@
     <p>Is it still there?Y/N</p>
     <p><strong>Description:</strong> <%= @incident.description %></p>
 
-    <%= image_tag @incident.img_url, alt: 'Incident Image' %>
 
     <%= link_to incident_comments_path(incident_id: @incident.id) do %>
       <button type="button" class="btn btn-link">
