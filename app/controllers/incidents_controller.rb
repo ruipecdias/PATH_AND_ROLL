@@ -6,10 +6,10 @@ class IncidentsController < ApplicationController
 
   def create
     @incident = Incident.new(incident_params)
-    @incident.user = current_user 
-  
+    @incident.user = current_user
+
     if @incident.save
-      redirect_to incident_path(@incident), notice: 'Incident was successfully created.'
+      redirect_to incidents_path, notice: 'Incident was successfully created.'
     else
       render :new
     end
@@ -62,7 +62,7 @@ def incident_params
 end
 
 def incidents_today
-  selected_location = [38.7261, -9.1455] 
+  selected_location = [38.7261, -9.1455]
   radius = 10 # in kilometers
   Incident.where("created_at >= ?", Time.zone.now.beginning_of_day)
           .near(selected_location, radius)
