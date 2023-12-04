@@ -153,7 +153,7 @@ locations.each_with_index do |location, index|
   end
 end
 
-# Create Comments for each Incident
+
 comment1 = Comment.create!(
   user: pontus,
   incident_id: Incident.first.id,

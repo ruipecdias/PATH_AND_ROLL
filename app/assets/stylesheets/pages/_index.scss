@@ -12,7 +12,7 @@ body {
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
   background-color: #EBECED;
-  box-shadow: 0px -10px 20px -7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px -10px 20px -7px rgba(42, 42, 42, 0.3);
   bottom: 55px;
   height: max-content;
 }
@@ -23,6 +23,7 @@ body {
 
 .offcanvas, .offcanvas-xxl, .offcanvas-xl, .offcanvas-lg, .offcanvas-md, .offcanvas-sm {
   --bs-offcanvas-height: fit-content;
+  --bs-offcanvas-border-width: 0px;
 }
 
 body {
