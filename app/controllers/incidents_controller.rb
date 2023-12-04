@@ -42,6 +42,17 @@ class IncidentsController < ApplicationController
     end
   end
 
+  def destroy
+    if @incident.user == current_user
+      @incident.destroy
+      flash[:notice] = "Incident successfully deleted."
+      redirect_to incidents_path
+    else
+      flash[:alert] = "You are not authorized to delete this incident."
+      redirect_to incidents_path
+    end
+  end
+
 end
 
 private
