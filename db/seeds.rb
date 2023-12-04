@@ -81,3 +81,35 @@ end
 # Create Comments for each Incident
 
 puts "Seeding completed!"
+
+
+
+comment1 = Comment.create!(
+    user: pontus,
+    incident_id: Incident.first.id,
+    content: "I was trying to buy sweedish meatballs at IKEA and I couldn't get there because of this obstruction. I'm so hungry now!"
+  )
+  comment2 = Comment.create!(
+    user: cintia,
+    incident_id: Incident.first.id,
+    content: "I was going to meet friends for a dinner and I got stuck here for 30 minutes. When I finally arrived there was no food left :("
+  )
+  comment1 = Comment.create!(
+    user: martim,
+    incident_id: Incident.first.id,
+    content: "I was distracted listening to music and I fell into a hole in the ground!"
+  )
+  comment1 = Comment.create!(
+    user: david,
+    incident_id: Incident.first.id,
+    content: "I was trying to buy sweedish meatballs at IKEA and I couldn't get there because of this obstruction. I'm so hungry now!"
+  )
+  comment1 = Comment.create!(
+    user: margarida,
+    incident_id: Incident.first.id,
+    content: "I was trying to buy sweedish meatballs at IKEA and I couldn't get there because of this obstruction. I'm so hungry now!"
+  )comment1 = Comment.create!(
+    user: bernardo,
+    incident_id: Incident.first.id,
+    content: "I crossing the street on my board and I got stuck. Next time I'll go to Caparica."
+  )

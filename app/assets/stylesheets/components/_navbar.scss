@@ -1,8 +1,8 @@
 .navbar {
-  justify-content: space-between;
   background: white;
   position: fixed;
   z-index: 9999;
+  padding: 0px;
 }
 
 .navbar .navbar-collapse {
@@ -10,12 +10,10 @@
 }
 
 .cone {
-  height: 16px;
-  transform: translateY(-2px);
+  height: 40px;
 }
 
 .active {
-  /* Add your styles for active state, e.g., color: orange; */
   color: orange;
   position: relative;
 }
@@ -32,13 +30,6 @@
   border-radius: 50%;
 }
 
-.dot {
-  content: '';
-  position: absolute;
-  transform: translateX(-10%);
-  left: 50%;
-  width: 5px;
-  height: 5px;
-  background-color: $orange;
-  border-radius: 50%;
+.icons {
+  transform: translateY(8px);
 }
