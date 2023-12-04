@@ -42,20 +42,19 @@
     <a href="<%= incidents_path %>" class="see-all">see all</a>
   </div>
     <%# Loop through incidents reported by the user %>
-    <% if @reported_incidents.present? %>
-    <% @reported_incidents.take(3).each do |incident| %>
-    <div class='p-3 rounded-4 my-2 d-flex justify-content-between'
-    style='background-color: #FFE9D6; color: #FF7900'>
+  <% if @reported_incidents.present? %>
+  <% @reported_incidents.each do |incident| %>
+    <div class='p-3 rounded-4 my-2 d-flex justify-content-between' style='background-color: #FFE9D6; color: #FF7900'>
       <div><%= incident.description %></div>
       <div>
-        <%= incident.created_at.strftime('%d') %>
-        <%= incident.created_at.strftime('%b') %>
-        <%= incident.created_at.strftime('%Y') %>
-     </div>
-    <% end %>
-    <% else %>
-     <p style='color: gray'><em>You haven't reported any incident yet.</em></p>
-    <% end %>
+        <%= incident.created_at.strftime('%d %b %Y') %>
+        <%= link_to 'Delete', incident_path(incident), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <p style='color: gray'><em>You haven't reported any incident yet.</em></p>
+<% end %>
   <div>
 </div>
 </div>
