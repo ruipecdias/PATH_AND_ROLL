@@ -7,23 +7,53 @@
       <p class='m-0' style='color: #FF7900'>
         <em><%= incident.affecting_pins.count %> <%= 'person'.pluralize(incident.affecting_pins.count) %> affected</em>
       </p>
-      <!-- Share Button with Options -->
-      <div class='share-options'>
-        <div class='share-button' id='shareButton'>
-          <i class='fa-solid fa-share-nodes' style='color: #7b7f83;'></i>
-        </div>
-        <div class='options-container' id='optionsContainer'>
-          <!-- WhatsApp Share Button -->
-          <%= link_to 'https://api.whatsapp.com/send?text=#{incident_url(incident)}', target: '_blank', title: 'Share on WhatsApp' do %>
-            <i class='fab fa-whatsapp'></i>
-          <% end %>
-          <!-- Copy Link Button -->
-          <button id='copyLinkButton' title='Copy Link'>
-            <i class='far fa-copy'></i>
-          </button>
-        </div>
-      </div>
+       <!-- Share Button with Options -->
+  <div class='share-options'>
+    <div class='share-button' id='shareButton-<%= incident.id %>'>
+      <i class='fa-solid fa-share-nodes' style='color: #7b7f83;'></i>
     </div>
+    <div class='options-container' id='optionsContainer-<%= incident.id %>'>
+      <!-- WhatsApp Share Button -->
+      <%= link_to "https://api.whatsapp.com/send?text=#{incident_url(incident)}", target: '_blank', title: 'Share on WhatsApp' do %>
+        <i class='fab fa-whatsapp'></i>
+      <% end %>
+      <!-- Copy Link Button -->
+      <button id='copyLinkButton-<%= incident.id %>' title='Copy Link'>
+        <i class='far fa-copy'></i>
+      </button>
+    </div>
+  </div>
+
+  </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const shareButton = document.getElementById('shareButton-<%= incident.id %>');
+    const optionsContainer = document.getElementById('optionsContainer-<%= incident.id %>');
+    const copyLinkButton = document.getElementById('copyLinkButton-<%= incident.id %>');
+
+    shareButton.addEventListener('click', function () {
+      optionsContainer.classList.toggle('show-options');
+    });
+
+    copyLinkButton.addEventListener('click', function () {
+      const incidentUrl = '<%= incident_url(incident) %>';
+      const tempInput = document.createElement('input');
+      document.body.appendChild(tempInput);
+      tempInput.value = incidentUrl;
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      alert('Link copied to clipboard!');
+    });
+  });
+</script>
+
+
+
+
+
+
     <!-- Title of the incident (category) -->
     <div class='d-flex flex-column'>
       <h2 class='mb-0'><%= incident.category %></h2>
