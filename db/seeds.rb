@@ -15,16 +15,56 @@ User.destroy_all
   )
 end
 
-users = User.all
+pontus = User.create!(
+  email: 'pontus@lofgren.com',
+  password: 'Pontus1#',
+  first_name: 'Pontus',
+  last_name: 'Löfgren'
+)
 
-# Locations in Downtown Lisbon
-locations = [
-  'Praça do Comércio, Lisbon', 'Rossio Square, Lisbon', 'Avenida da Liberdade, Lisbon',
-  'Chiado, Lisbon', 'Bairro Alto, Lisbon', 'Alfama, Lisbon', 'Cais do Sodré, Lisbon', 'Príncipe Real, Lisbon',
-  'Santa Justa Lift, Lisbon', 'Campo de Ourique, Lisbon'
-]
+cintia = User.create!(
+  email: 'cynthia@albuquerque.com',
+  password: 'Chyntia1#',
+  first_name: 'Chyntia',
+  last_name: 'Albuquerque'
+)
 
-# Safe image URLs for Cloudinary
+martim = User.create!(
+  email: 'martim@costa.com',
+  password: 'Martim1#',
+  first_name: 'Martim',
+  last_name: 'Costa'
+)
+
+david = User.create!(
+  email: 'david@carmo.com',
+  password: 'David1#',
+  first_name: 'David',
+  last_name: 'Carmo'
+)
+
+margarida = User.create!(
+  email: 'margarida@toureiro.com',
+  password: 'Margarida1#',
+  first_name: 'Margarida',
+  last_name: 'Toureiro'
+)
+
+bernardo = User.create!(
+  email: 'bernardo@ralao.com',
+  password: 'Bernardo1#',
+  first_name: 'Bernardo',
+  last_name: 'Ralão'
+)
+
+rui = User.create!(
+  email: 'rui@dias.com',
+  password: 'Ruidias1#',
+  first_name: 'Rui',
+  last_name: 'Dias'
+)
+
+users = [pontus, cintia, martim, david, margarida, bernardo, rui]
 
 imgurls =[
   "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701441105/IMG_0260_oqg0ll.jpg",
@@ -36,8 +76,43 @@ imgurls =[
   "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701366711/wr2v5lzdfpfee7tuewpv.jpg",
   "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701366710/iwaxudgt5xp7xjhehmbi.jpg",
   "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701441106/IMG_0295_pvnj3o.jpg",
-  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701441123/IMG_0261_tcpa91.jpg"
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701441123/IMG_0261_tcpa91.jpg",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701446847/132779101_pkugp7.jpg",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701446848/33777796_ha8x5o.jpg",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701446847/146536223_gwgkhe.jpg",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701446849/146834417_w4mtww.jpg",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701446848/Screen_Shot_2023-12-01_at_16.03.00_ya4fqs.png",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701446848/Screen_Shot_2023-12-01_at_16.03.21_avwntz.png",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701444685/n0pjqvod2fv4gh67mh2vr18ojp9y.jpg"
 ]
+
+userimg =[
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701446848/33777796_ha8x5o.jpg",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701446847/146536223_gwgkhe.jpg",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701446847/132779101_pkugp7.jpg",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701446848/Screen_Shot_2023-12-01_at_16.03.21_avwntz.png",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701446848/Screen_Shot_2023-12-01_at_16.03.00_ya4fqs.png",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701446849/146834417_w4mtww.jpg",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701444685/n0pjqvod2fv4gh67mh2vr18ojp9y.jpg"
+]
+
+
+users.each_with_index do |user, index|
+  file = URI.open(userimg[index])
+  user.photo.attach(io: file, filename: "user_#{user.id}.jpg", content_type: 'image/jpg')
+  user.save
+end
+
+# Locations in Downtown Lisbon
+locations = [
+  'Praça do Comércio, Lisbon', 'Rossio Square, Lisbon', 'Avenida da Liberdade, Lisbon',
+  'Chiado, Lisbon', 'Bairro Alto, Lisbon', 'Alfama, Lisbon', 'Cais do Sodré, Lisbon', 'Príncipe Real, Lisbon',
+  'Santa Justa Lift, Lisbon', 'Campo de Ourique, Lisbon'
+]
+
+# Safe image URLs for Cloudinary
+
+
 
 
 
@@ -78,38 +153,35 @@ locations.each_with_index do |location, index|
   end
 end
 
-# Create Comments for each Incident
-
-puts "Seeding completed!"
-
-
 
 comment1 = Comment.create!(
-    user: pontus,
-    incident_id: Incident.first.id,
-    content: "I was trying to buy sweedish meatballs at IKEA and I couldn't get there because of this obstruction. I'm so hungry now!"
-  )
-  comment2 = Comment.create!(
-    user: cintia,
-    incident_id: Incident.first.id,
-    content: "I was going to meet friends for a dinner and I got stuck here for 30 minutes. When I finally arrived there was no food left :("
-  )
-  comment1 = Comment.create!(
-    user: martim,
-    incident_id: Incident.first.id,
-    content: "I was distracted listening to music and I fell into a hole in the ground!"
-  )
-  comment1 = Comment.create!(
-    user: david,
-    incident_id: Incident.first.id,
-    content: "I was trying to buy sweedish meatballs at IKEA and I couldn't get there because of this obstruction. I'm so hungry now!"
-  )
-  comment1 = Comment.create!(
-    user: margarida,
-    incident_id: Incident.first.id,
-    content: "I was trying to buy sweedish meatballs at IKEA and I couldn't get there because of this obstruction. I'm so hungry now!"
-  )comment1 = Comment.create!(
-    user: bernardo,
-    incident_id: Incident.first.id,
-    content: "I crossing the street on my board and I got stuck. Next time I'll go to Caparica."
-  )
+  user: pontus,
+  incident_id: Incident.first.id,
+  content: "I was trying to buy sweedish meatballs at IKEA and I couldn't get there because of this obstruction. I'm so hungry now!"
+)
+comment2 = Comment.create!(
+  user: cintia,
+  incident_id: Incident.first.id,
+  content: "I was going to meet friends for a dinner and I got stuck here for 30 minutes. When I finally arrived there was no food left :("
+)
+comment3 = Comment.create!(
+  user: martim,
+  incident_id: Incident.first.id,
+  content: "I was distracted listening to music and I fell into a hole in the ground!"
+)
+comment4 = Comment.create!(
+  user: david,
+  incident_id: Incident.first.id,
+  content: "I fall and broke my leg because of this obstruction. I guess I won't be playing in the next Olympics"
+)
+comment5 = Comment.create!(
+  user: margarida,
+  incident_id: Incident.first.id,
+  content: "This is absurd!!!!!"
+)
+comment6 = Comment.create!(
+  user: bernardo,
+  incident_id: Incident.first.id,
+  content: "I was crossing the street on my board and I got stuck. Next time I'll go to Caparica."
+)
+puts "Seeding completed!"
