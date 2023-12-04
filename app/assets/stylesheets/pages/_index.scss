@@ -29,3 +29,17 @@ body {
 body {
   background-color: #EBECED;
 }
+
+.incidents-count {
+  position: absolute;
+  top: 70px;
+  left: 20px;
+  background-color: $light-orange;
+  color: $orange;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 1000;
+  padding: 15px;
+  width: fit-content;
+  height: max-content;
+}
