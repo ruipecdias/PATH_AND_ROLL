@@ -1,5 +1,5 @@
 class IncidentsController < ApplicationController
-  
+\
   def new
     @incident = Incident.new
   end
@@ -30,6 +30,7 @@ class IncidentsController < ApplicationController
   def index
     puts "Mapbox API Key: #{ENV['MAPBOX_API_KEY']}"
     @incidents = Incident.all
+    @today_incidents = incidents_today
 
     @markers = @incidents.geocoded.map do |incident|
       {
@@ -47,4 +48,11 @@ private
 
 def incident_params
   params.require(:incident).permit(:location, :category, :description, :status, photos: [])
+end
+
+def incidents_today
+  selected_location = [38.7261, -9.1455] 
+  radius = 10 # in kilometers
+  Incident.where("created_at >= ?", Time.zone.now.beginning_of_day)
+          .near(selected_location, radius)
 end

@@ -8,3 +8,10 @@
   <%= render "incident", incident: incident %>
   <% end %>
 </div>
+
+<div class="incidents-count">
+  <h3>Incidents Today Around You</h3>
+  <p><%= @today_incidents.length %> incidents occurred today within 10km of Le Wagon(Your location)</p>
+</div>
+
+

@@ -19,3 +19,15 @@
       height: 30vh; /* Smaller height for mobile devices */
     }
   }
+
+.incidents-count {
+    position: absolute; // To position it relative to the map
+    top: 70px; // Adjust this value to position below your navbar
+    left: 20px; // Space from the left edge
+    background-color: white; // Background of the card
+    padding: 15px; // Spacing inside the card
+    border-radius: 8px; // Rounded corners
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); // A subtle shadow
+    z-index: 1000; // Ensure it's above other elements
+    width: 300px; // Fixed width, adjust as necessary
+  }
