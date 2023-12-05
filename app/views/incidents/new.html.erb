@@ -4,29 +4,21 @@
       <h2 class='mb-4' style='color: #FF7900'>Report an Incident</h2>
       <%= image_tag 'real_cone.png', style:'width: 60px; margin-right: 25px'%>
     </div>
-      <%= form_with(model: @incident, local: true, url: incidents_path) do |form| %>
-        <div class="form-group">
-          <i class='fa-solid fa-location-dot' style='color: #FF7900;'></i>
-          <%= form.label :location, "Where?", style: 'color: #FF7900;' %>
-          <%= form.text_field :location, class: "form-control rounded-4 py-3 my-2",
-          placeholder:"Terminal de Cruzeiros de Lisboa - Edifício NE, Doca, R. Jardim do Tabaco 1st floor, 1100-651 Lisboa",
-          required: true %>
-        </div>
 
     <div class='bg-white rounded-4 p-3 mt-4'>
       <%= form_with(model: @incident, local: true, url: incidents_path) do |form| %>
         <div class="form-group">
           <i class='fa-solid fa-location-dot' style='color: #FF7900;'></i>
-          <strong><%= form.label :location, "Where?", style: 'color: #FF7900;' %></strong>
-          <%= form.text_field :location, class: "form-control rounded-4 py-2 my-2",
+          <%= form.label :location, "Where?", style: 'color: #FF7900;' %>
+          <%= form.text_field :location, class: "form-control rounded-4 py-3 my-2",
                               placeholder: "Terminal de Cruzeiros de Lisboa - Edifício NE, Doca, R. Jardim do Tabaco 1st floor, 1100-651 Lisboa",
                               required: true %>
-        </div><br>
+        </div>
 
         <div class="d-flex justify-content-start">
           <%= image_tag 'cone_orange.png',
               style: 'width: 15px; height: 15px',
-              class:'cono' %>
+              class: 'cono' %>
           <strong><p style='color: #FF7900;'>Which type of incident?<p></strong>
         </div>
         <div class="btn-group" data-controller="category-btn" data-action="click->category-btn#handleIncidentSelection">
@@ -40,7 +32,7 @@
           <ul class="dropdown-menu rounded-4 p-3">
             <li class='border-bottom py-1'>Constructions</li>
             <li class='border-bottom py-1'>Accident</li>
-            <li class='py-1'>Structural</li>
+            <li class='py-1 px-3'>Structural</li>
           </ul>
         </div><br><br>
 
@@ -58,7 +50,7 @@
 
         <div class="form-group">
           <i class="fa-solid fa-image" style="color: #ff7900;"></i>
-          <strong><%= form.label :photo, "Add photos", style: 'color: #FF7900;', class:'mb-1' %></strong>
+          <strong><%= form.label :photo, "Add photos", style: 'color: #FF7900;', class: 'mb-1' %></strong>
           <%= form.file_field :photo, class: "form-control-file" %>
         </div>
 
@@ -68,4 +60,5 @@
         </div>
       <% end %>
     </div>
-  </body
+  </div>
+</body>
