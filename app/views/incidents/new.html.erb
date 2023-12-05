@@ -1,28 +1,52 @@
-<h2 class='mb-0'>Report an Incident</h2>
+<body style='background-color: #FFE9D6'>
+<div class='p-4'>
+<div class='d-flex justify-content-between mt-5'>
+  <h2 class='mb-4' style='color: #FF7900'>Report an Incident</h2>
+  <%= image_tag 'real_cone.png', style:'width: 60px; margin-right: 25px'%>
+</div>
+  <%= form_with(model: @incident, local: true, url: incidents_path) do |form| %>
+    <div class="form-group">
+      <i class='fa-solid fa-location-dot' style='color: #FF7900;'></i>
+      <%= form.label :location, "Where?", style: 'color: #FF7900;' %>
+      <%= form.text_field :location, class: "form-control rounded-4 py-3 my-2",
+      placeholder:"Terminal de Cruzeiros de Lisboa - Edifício NE, Doca, R. Jardim do Tabaco 1st floor, 1100-651 Lisboa",
+      required: true %>
+    </div>
 
-<%= form_with(model: @incident, local: true, url: incidents_path) do |form| %>
-  <div class="form-group">
-    <%= form.label :location, "Location" %>
-    <%= form.text_field :location, class: "form-control", required: true %>
+  <p style='color: #FF7900;'>Which type of incident?<p>
+  <div class="btn-group">
+    <button class="btn btn-light dropdown-toggle rounded-4 mb-2 p-3"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false">
+      Select a type...
+    </button>
+    <ul class="dropdown-menu rounded-4 p-3">
+      <li class='border-bottom py-2'>Constructions</li>
+      <li class='border-bottom py-2'>Accident</li>
+      <li class='border-bottom py-2'>Structural</li>
+    </ul>
   </div>
 
-  <div class="form-group">
-    <%= form.label :category, "Category" %>
-    <%= form.text_field :category, class: "form-control", required: true %>
-  </div>
+    <div class="form-group">
+      <%= form.label :description, "Tell us more",
+                          style: 'color: #FF7900;' %>
+      <%= form.text_area :description,
+                          class: "form-control rounded-4 my-2",
+                          placeholder: "Enter your description here",
+                          required: true %>
+    </div>
 
-  <div class="form-group">
-    <%= form.label :description, "Description" %>
-    <%= form.text_area :description, class: "form-control", required: true %>
-  </div>
 
-  <div class="form-group">
-    <%= form.label :photo, "Upload Photo" %>
-    <%= form.file_field :photo, class: "form-control-file" %>
-  </div>
+    <div class="form-group">
+      <%= form.label :photo, "Upload Photo", style: 'color: #FF7900;' %>
+      <%= form.file_field :photo, class: "form-control-file" %>
+    </div>
 
-  <div class="d-flex justify-content-end mt-4">
-    <%= form.submit "Submit",
-    style: "border-radius: 8px; border: none; padding: 10px 50px; background-color: #FF7900; color: #fff;" %>
-  </div>
-<% end %>
+    <div class="d-flex justify-content-end mt-4">
+      <%= form.submit "Submit",
+      style: "border-radius: 8px; border: none; padding: 10px 50px; background-color: #FF7900; color: #fff;" %>
+    </div>
+  <% end %>
+</div>
+</body>
