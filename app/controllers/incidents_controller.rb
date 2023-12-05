@@ -9,7 +9,7 @@ class IncidentsController < ApplicationController
     @incident.user = current_user
 
     if @incident.save
-      redirect_to dashboard_path, notice: 'Incident was successfully created.'
+      redirect_to incidents_path, notice: 'Incident was successfully created.'
     else
       render :new
     end
