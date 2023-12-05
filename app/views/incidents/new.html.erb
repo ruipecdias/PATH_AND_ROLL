@@ -13,8 +13,8 @@
       required: true %>
     </div>
 
-  <p style='color: #FF7900;'>Which type of incident?<p>
-  <div class="btn-group">
+  <p style='color: #FF7900;'>Which type of incident?</p>
+  <div class="btn-group" data-controller="category-btn" data-action="click->category-btn#handleIncidentSelection">
     <button class="btn btn-light dropdown-toggle rounded-4 mb-2 p-3"
             type="button"
             data-bs-toggle="dropdown"
@@ -27,6 +27,8 @@
       <li class='border-bottom py-2'>Structural</li>
     </ul>
   </div>
+</div>
+
 
 
     <div class="form-group">
