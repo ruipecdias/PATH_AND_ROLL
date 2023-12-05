@@ -44,13 +44,13 @@
   <% @reported_incidents.each do |incident| %>
     <div class='p-3 rounded-4 my-2 d-flex justify-content-between' style='background-color: #FFE9D6; color: #FF7900'>
       <div><%= incident.category %></div>
-      <div>
+      <%# <div>
         <%= incident.created_at.strftime('%d %b %Y') %>
-      <%= link_to '×', incident.destroy,
+      <%# <%= link_to '×', incident.destroy,
       method: :delete,
       data: { confirm: 'Are you sure?' },
       class: 'close btn bg-transparent btn-outline-primary' %>
-      </div>
+      <%# </div> %>
   <% end %>
 <% else %>
   <p style='color: gray'><em>You haven't reported any incident yet.</em></p>
