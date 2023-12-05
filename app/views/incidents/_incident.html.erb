@@ -52,10 +52,6 @@
 </script>
 
 
-
-
-
-
     <!-- Title of the incident (category) -->
     <div class='d-flex flex-column'>
       <h2 class='mb-0'><%= incident.category %></h2>
@@ -125,11 +121,11 @@
 
 <!-- Add Bootstrap Carousel for Incident Photos -->
 <div class="d-flex justify-content-center">
-  <div id="incidentCarousel" class="carousel slide mb-3" data-bs-ride="carousel" style="width: 300px">
+  <div id="incidentCarousel" class="carousel slide" data-bs-ride="carousel" style="width: 100%;">
     <div class="carousel-inner">
       <% incident.photos.each_with_index do |photo, index| %>
         <div class="carousel-item <%= index.zero? ? 'active' : '' %>">
-          <%= cl_image_tag photo.key, height: 200, width: 300, crop: :fill, class: 'd-block rounded-4' %>
+          <%= cl_image_tag photo.key, height: 150, width: 323, crop: :fill, class: 'd-block rounded-4 mb-1' %>
         </div>
       <% end %>
     </div>
@@ -143,6 +139,7 @@
     </button>
   </div>
 </div>
+
 
 
   </div>
