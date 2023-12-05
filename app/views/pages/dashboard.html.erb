@@ -46,7 +46,9 @@
       <div><%= incident.category %></div>
       <div>
         <%= incident.created_at.strftime('%d %b %Y') %>
-        <%= link_to 'Delete', incident_path(incident), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        <%= link_to '×', destroy_incident_path(incident),
+          data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
+          class: 'close btn bg-transparent btn-outline-primary' %>
       </div>
   <% end %>
 <% else %>
@@ -58,4 +60,3 @@
 </div>
 </div>
 </div>
-
