@@ -23,22 +23,12 @@
               class: 'cono' %>
           <strong><p style='color: #FF7900;'>Which type of incident?<p></strong>
         </div>
-        <div class="btn-group" data-controller="category-btn" data-action="click->category-btn#handleIncidentSelection">
-          <button class="btn dropdown-toggle rounded-4 mb-2 p-2"
-                  style='background-color: #F4F4F4'
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false">
-            Select a type...
-          </button>
-          <ul class="dropdown-menu rounded-4 p-3">
-            <li class='border-bottom py-1'>Constructions</li>
-            <li class='border-bottom py-1'>Accident</li>
-            <li class='py-1'>Structural</li>
-          </ul>
-        </div><br><br>
 
-        <%= form.hidden_field :category %>
+        <div class="form-group">
+          <%= form.label :category %>
+          <%= form.select :category, ['Construction', 'Accident', 'Structural'], { prompt: 'Select Type' }, class: 'form-control' %>
+        </div>
+
 
         <div class="form-group">
           <i class="fa-solid fa-circle-info" style="color: #ff7900;"></i>
