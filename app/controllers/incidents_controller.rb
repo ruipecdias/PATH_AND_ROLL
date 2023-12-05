@@ -1,6 +1,7 @@
 class IncidentsController < ApplicationController
 
   def new
+    @user_street_address = session[:userStreetAddress]
     @incident = Incident.new
   end
 

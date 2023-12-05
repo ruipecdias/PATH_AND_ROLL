@@ -8,7 +8,9 @@
     data-controller="map"
     data-map-markers-value="<%= @markers.to_json %>"
     data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-  </div>
+
+    </div>
+
 
   <div data-controller="open-incidents">
     <% @incidents.each do |incident| %>
@@ -28,6 +30,7 @@
       <p class='my-0 mx-2'>Today there are <strong><%= @today_incidents.length %> new incidents</strong><br>around you.</p>
     </div>
   </div>
+
 
 <script>
   function closeIncidentsCount() {
