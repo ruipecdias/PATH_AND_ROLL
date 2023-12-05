@@ -3,6 +3,7 @@ import mapboxgl from 'mapbox-gl'
 
 export default class extends Controller {
   static values = { apiKey: String, markers: Array }
+  static targets = ["location"]
 
   connect() {
     mapboxgl.accessToken = this.apiKeyValue;
@@ -48,7 +49,21 @@ export default class extends Controller {
         const userLat = position.coords.latitude;
         const userLng = position.coords.longitude;
         this.centerMapOnLocation(userLat, userLng);
-  
+
+    // Reverse Geocoder
+        this.reverseGeocode(userLat, userLng, (address) => {
+        const userAddress = address;
+        console.log(document.getElementById('new_incident_address').href);
+        const button = document.getElementById('new_incident_address');
+        button.href = `${button.href}?location=${userAddress}`
+        // this.locationTarget.innerText = userAddress
+        // console.log(this.cenasTarget)
+        // console.log(userAddress)
+      })
+    // Store the address with cookies
+        
+
+
         // Create a marker for the user's location
         const userLocationMarker = new mapboxgl.Marker()
           .setLngLat([userLng, userLat])
@@ -62,8 +77,22 @@ export default class extends Controller {
       // Handle browsers that don't support Geolocation
     }
   }
-  
-  centerMapOnLocation(lat, lng) {
+  reverseGeocode(lat, lng, callback){
+    const apiKey = "pk.eyJ1Ijoic2l4aWFvMDEiLCJhIjoiY2xvZnd4MTFmMHd2OTJrcXBiMW9rczlyayJ9.swTrpsP7uxYAJkep3m8ehg"
+    const geocodingUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${apiKey}`;
+
+    fetch(geocodingUrl)
+    .then(response => response.json())
+    .then(data => {
+      const address = data.features[0].place_name;
+      callback(address);
+      })
+      .catch((err) =>{
+        console.warn('Something went wrong.', err);
+        });
+  }
+
+    centerMapOnLocation(lat, lng) {
     this.map.flyTo({
       center: [lng, lat],
       zoom: 15 // Adjust the zoom level as needed
