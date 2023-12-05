@@ -11,7 +11,7 @@ class Incident < ApplicationRecord
   validates :description, presence: true
   enum status: { unresolved: false, resolved: true }
 
-  validates :status, presence: true
+  # validates :status, presence: true
 
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?

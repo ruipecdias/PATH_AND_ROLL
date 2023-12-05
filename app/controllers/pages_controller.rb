@@ -19,31 +19,4 @@ class PagesController < ApplicationController
       }
   end
 end
-
-
-def process_with_chatgpt(message)
-  api_url = "https://api.openai.com/v1/engines/davinci-codex/completions"
-  api_key = "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" # Replace with your actual API key
-
-  headers = {
-    "Authorization" => "Bearer #{api_key}",
-    "Content-Type" => "application/json"
-  }
-
-  body = {
-    prompt: message,
-    max_tokens: 50 # Adjust as needed
-  }.to_json
-
-  response = HTTP.headers(headers).post(api_url, body: body)
-  if response.status.success?
-    result = JSON.parse(response.body)
-    return result["choices"].first["text"].strip
-  else
-    # Handle error (e.g., log it, notify, return a default message, etc.)
-    Rails.logger.error "ChatGPT API Error: #{response.status} - #{response.body}"
-    return "I'm having trouble processing your request right now."
-  end
-end
-
 end

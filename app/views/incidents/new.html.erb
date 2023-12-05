@@ -4,6 +4,14 @@
       <h2 class='mb-4' style='color: #FF7900'>Report an Incident</h2>
       <%= image_tag 'real_cone.png', style:'width: 60px; margin-right: 25px'%>
     </div>
+      <%= form_with(model: @incident, local: true, url: incidents_path) do |form| %>
+        <div class="form-group">
+          <i class='fa-solid fa-location-dot' style='color: #FF7900;'></i>
+          <%= form.label :location, "Where?", style: 'color: #FF7900;' %>
+          <%= form.text_field :location, class: "form-control rounded-4 py-3 my-2",
+          placeholder:"Terminal de Cruzeiros de Lisboa - Edifício NE, Doca, R. Jardim do Tabaco 1st floor, 1100-651 Lisboa",
+          required: true %>
+        </div>
 
     <div class='bg-white rounded-4 p-3 mt-4'>
       <%= form_with(model: @incident, local: true, url: incidents_path) do |form| %>
@@ -21,7 +29,7 @@
               class:'cono' %>
           <strong><p style='color: #FF7900;'>Which type of incident?<p></strong>
         </div>
-        <div class="btn-group">
+        <div class="btn-group" data-controller="category-btn" data-action="click->category-btn#handleIncidentSelection">
           <button class="btn dropdown-toggle rounded-4 mb-2 p-2"
                   style='background-color: #F4F4F4'
                   type="button"
@@ -35,6 +43,8 @@
             <li class='py-1'>Structural</li>
           </ul>
         </div><br><br>
+
+        <%= form.hidden_field :category %>
 
         <div class="form-group">
           <i class="fa-solid fa-circle-info" style="color: #ff7900;"></i>
@@ -58,5 +68,4 @@
         </div>
       <% end %>
     </div>
-  </div>
-</body>
+  </body
