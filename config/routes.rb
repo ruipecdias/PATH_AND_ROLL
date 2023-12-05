@@ -9,10 +9,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  resources :incidents do
+  resources :incidents, except: [:destroy] do
     resources :comments, only: [:index, :create], shallow: true
     resources :affecting_pins, only: [:create]
   end
+
+  delete "incidents/:id", to: "incidents#destroy", as: "destroy_incident"
+
   get '/dashboard', to: 'pages#dashboard', as: 'dashboard'
 
   patch "toggle_pin/:id", to: "affecting_pins#toggle_pin", as: "toggle_pin"
