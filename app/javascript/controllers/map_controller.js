@@ -9,7 +9,9 @@ export default class extends Controller {
 
     this.map = new mapboxgl.Map({
       container: this.element,
-      style: 'mapbox://styles/sixiao01/clpii274n00mn01pjd1wld7f1'
+      style: 'mapbox://styles/sixiao01/clpii274n00mn01pjd1wld7f1',
+      center: [-9.128540, 38.709460],
+      zoom: 15
     });
 
     this.#addMarkersToMap();
@@ -33,4 +35,11 @@ export default class extends Controller {
     this.markersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]));
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 });
   }
+
+  #recentermap() {
+    const bounds = new mapboxgl.LngLatBounds();
+    bounds.extend([ 38.7117262, -9.126715 ]); //38.7117262,-9.126715
+    this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 });
+  }
 }
+
