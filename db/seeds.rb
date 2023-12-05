@@ -24,8 +24,8 @@ pontus = User.create!(
 
 cintia = User.create!(
   email: 'cynthia@albuquerque.com',
-  password: 'Chyntia1#',
-  first_name: 'Chyntia',
+  password: 'Cynthia1#',
+  first_name: 'Cynthia',
   last_name: 'Albuquerque'
 )
 

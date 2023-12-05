@@ -20,18 +20,9 @@ class PagesController < ApplicationController
   end
 end
 
-def chat_gpt_response
-  user_message = params[:message]
-  # Process the message with ChatGPT (or similar AI service)
-  response = process_with_chatgpt(user_message)
-  render json: { response: response }
-end
-
-
-require 'http'
 
 def process_with_chatgpt(message)
-  api_url = "https://api.openai.com/v1/engines/davinci-codex/completions" 
+  api_url = "https://api.openai.com/v1/engines/davinci-codex/completions"
   api_key = "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" # Replace with your actual API key
 
   headers = {
