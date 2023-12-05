@@ -62,7 +62,7 @@ def incident_params
 end
 
 def incidents_today
-  selected_location = [38.7261, -9.1455]
+  selected_location = [38.709460, -9.128540]
   radius = 10 # in kilometers
   Incident.where("created_at >= ?", Time.zone.now.beginning_of_day)
           .near(selected_location, radius)
