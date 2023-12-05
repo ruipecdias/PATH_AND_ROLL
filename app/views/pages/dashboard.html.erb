@@ -17,7 +17,7 @@
       <% if @affecting_incidents.present? %>
         <% @affecting_incidents.take(3).each do |incident| %>
           <div class='p-3 rounded-4 my-2 d-flex justify-content-between'
-               style='background-color: #FFE9D6; color: #FF7900'>
+               style="<%= incident.resolved? ? 'background-color: #B1FBE6; color: #0AA374;' : 'background-color: #FFE9D6; color: #FF7900;' %>">
             <div><%= incident.category %></div>
             <div>
               <%= incident.created_at.strftime('%d') %>
@@ -41,7 +41,7 @@
       <% if @reported_incidents.present? %>
         <% @reported_incidents.each do |incident| %>
           <div class='p-3 rounded-4 my-2 d-flex justify-content-between align-items-center'
-               style='background-color: #FFE9D6; color: #FF7900'>
+               style="<%= incident.resolved? ? 'background-color: #B1FBE6; color: #0AA374;' : 'background-color: #FFE9D6; color: #FF7900;' %>">
             <div class="flex-grow-1"><%= incident.category %></div>
             <div class="text-right">
               <%= incident.created_at.strftime('%d %b %Y') %>
