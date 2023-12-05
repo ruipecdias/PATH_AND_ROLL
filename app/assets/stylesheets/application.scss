@@ -19,3 +19,12 @@
       height: 30vh; /* Smaller height for mobile devices */
     }
   }
+
+
+  .hidden {
+    display: none;
+  }
+  
+  .visible {
+    display: block; /* or 'flex', 'inline-block', etc., depending on your layout */
+  }
