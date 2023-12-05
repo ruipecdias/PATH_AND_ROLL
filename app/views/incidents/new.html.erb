@@ -1,12 +1,12 @@
-<body style='background-color: #FFE9D6'>
-  <div class='p-4'>
-    <div class='d-flex justify-content-center'>
-      <div class='d-flex flex-column mt-4'>
-        <div class='d-flex justify-content-center mb-3'><%= image_tag 'real_cone.png', style:'width: 60px'%></div>
-        <h2 style='color: #FF7900'>Report an Incident</h2>
-      </div>
+<div class='p-4'>
+  <div class='d-flex justify-content-center'>
+    <div class='d-flex flex-column mt-4'>
+      <div class='d-flex justify-content-center mb-3'><%= image_tag 'real_cone.png', style:'width: 60px'%></div>
+      <h2 style='color: #FF7900'>Report an Incident</h2>
     </div>
+  </div>
 
+ 
     <div class='bg-white rounded-4 p-3 mt-4'>
       <%= form_with(model: @incident, local: true, url: incidents_path) do |form| %>
         <div class="form-group">
@@ -15,52 +15,47 @@
         <%= form.text_field :location, id: "user-location", class: "form-control rounded-4 py-3 my-2", required: true %>            
         </div>
 
-        <div class="d-flex justify-content-start">
-          <%= image_tag 'cone_orange.png',
-              style: 'width: 15px; height: 15px',
-              class: 'cono' %>
-          <strong><p style='color: #FF7900;'>Which type of incident?<p></strong>
-        </div>
-        <div class="btn-group" data-controller="category-btn" data-action="click->category-btn#handleIncidentSelection">
-          <button class="btn dropdown-toggle rounded-4 mb-2 p-2"
-                  style='background-color: #F4F4F4'
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false">
-            Select a type...
-          </button>
-          <ul class="dropdown-menu rounded-4 p-3">
-            <li class='border-bottom py-1'>Constructions</li>
-            <li class='border-bottom py-1'>Accident</li>
-            <li class='py-1'>Structural</li>
-          </ul>
-        </div><br><br>
 
-        <%= form.hidden_field :category %>
+      <div class="d-flex justify-content-start">
+        <%= image_tag 'cone_orange.png',
+            style: 'width: 15px; height: 15px',
+            class: 'cono' %>
+        <strong><p style='color: #FF7900; margin-bottom: 0px'>Which type of incident?<p></strong>
+      </div>
 
-        <div class="form-group">
-          <i class="fa-solid fa-circle-info" style="color: #ff7900;"></i>
-          <strong><%= form.label :description, "Tell us more",
-                                  style: 'color: #FF7900;' %>
-          <%= form.text_area :description,
-                              class: "form-control rounded-4 my-2",
-                              placeholder: "Enter your description here",
-                              required: true %></strong>
-        </div><br>
 
-        <div class="form-group">
-          <i class="fa-solid fa-image" style="color: #ff7900;"></i>
-          <strong><%= form.label :photo, "Add photos", style: 'color: #FF7900;', class: 'mb-1' %></strong>
-          <%= form.file_field :photo, class: "form-control-file" %>
-        </div>
+      <div class="form-group">
+         <%= form.select :category, ['Construction', 'Accident', 'Structural'], { prompt: 'Select Type' }, class: 'form-control rounded-4 my-2' %>
+      </div>
+      <br>
 
-        <div class="d-flex justify-content-end mt-4">
-          <%= form.submit "Submit",
-                          style: "border-radius: 8px; border: none; padding: 10px 50px; background-color: #FF7900; color: white;" %>
-        </div>
-      <% end %>
-    </div>
+
+
+      <div class="form-group">
+        <i class="fa-solid fa-circle-info" style="color: #FF7900;"></i>
+        <strong><%= form.label :description, "Tell us more",
+                                style: 'color: #FF7900;' %>
+        <%= form.text_area :description,
+                            class: "form-control rounded-4 my-2",
+                            placeholder: "Enter your description here",
+                            required: true %></strong>
+      </div>
+      <br>
+
+      <div class="form-group">
+        <i class="fa-solid fa-image" style="color: #FF7900;"></i>
+        <strong><%= form.label :photo, "Add photos", style: 'color: #FF7900;', class: 'mb-2' %>
+        </strong>
+        <small><%= form.file_field :photo, class: "form-control-file", style: 'color: #7B7F83' %></small>
+      </div>
+
+      <div class="d-flex justify-content-end mt-4">
+        <%= form.submit "Submit",
+                        style: "border-radius: 8px; border: none; padding: 10px 50px; background-color: #FF7900; color: white;" %>
+      </div>
+    <% end %>
   </div>
+
   <p style="display:none;" id='user_location_input'><%= params[:location] != nil ? params[:location].strip : "" %></p>
 </body>
 
@@ -70,3 +65,6 @@
   console.log(loc);
   userLocation.value = loc;
 </script>
+
+</div>
+
