@@ -1,5 +1,5 @@
 <div class="mt-4 mb-5 pb-5 mx-5">
-<div class="mb-3"><%= link_to incidents_path, class: "back-link" do %>
+<div class="mb-3"><%=link_to incidents_path(last_incident_id: @incident.id), class: "back-link" do %>
   <i class="fa-solid fa-chevron-left"></i>
 <% end %></div>
 <h2>Comments</h2>
