@@ -1,0 +1,5 @@
+if (<%= @is_affected %>) {
+  // JavaScript to update the button and UI for the 'affected' state
+} else {
+  // JavaScript to update the button and UI for the 'not affected' state
+}

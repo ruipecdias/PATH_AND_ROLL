@@ -1,6 +1,4 @@
-<div class='offcanvas offcanvas-bottom'
-      tabindex='-1' id='offcanvasBottom-<%= incident.id %>'
-      aria-labelledby='offcanvasBottomLabel'>
+<div class='offcanvas offcanvas-bottom' tabindex='-1' id='offcanvasBottom-<%= incident.id %>' aria-labelledby='offcanvasBottomLabel'>
   <div class='offcanvas-header'>
   </div>
   <div class='offcanvas-body small mx-3'>
@@ -9,26 +7,23 @@
       <p class='m-0' style='color: #FF7900'>
         <em><%= incident.affecting_pins.count %> <%= 'person'.pluralize(incident.affecting_pins.count) %> affected</em>
       </p>
-       <!-- Share Button with Options -->
- <div data-controller="share" class='share-options'>
-  <div data-action="click->share#toggle" class='share-button' id='shareButton-<%= incident.id %>'>
-    <i class='fa-solid fa-share-nodes' style='color: #7b7f83;'></i>
-  </div>
-  <div class='options-container hidden' data-share-target="options" id='optionsContainer-<%= incident.id %>'>
-      <!-- WhatsApp Share Button -->
-      <%= link_to "https://api.whatsapp.com/send?text=#{incident_url(incident)}", target: '_blank', title: 'Share on WhatsApp' do %>
-        <i class='fab fa-whatsapp'></i>
-      <% end %>
-      <!-- Copy Link Button -->
-      <button id='copyLinkButton-<%= incident.id %>' title='Copy Link'>
-        <i class='far fa-copy'></i>
-      </button>
+      <!-- Share Button with Options -->
+      <div data-controller="share" class='share-options'>
+        <div data-action="click->share#toggle" class='share-button' id='shareButton-<%= incident.id %>'>
+          <i class='fa-solid fa-share-nodes' style='color: #7b7f83;'></i>
+        </div>
+        <div class='options-container hidden' data-share-target="options" id='optionsContainer-<%= incident.id %>'>
+          <!-- WhatsApp Share Button -->
+          <%= link_to "https://api.whatsapp.com/send?text=#{incident_url(incident)}", target: '_blank', title: 'Share on WhatsApp' do %>
+            <i class='fab fa-whatsapp'></i>
+          <% end %>
+          <!-- Copy Link Button -->
+          <button id='copyLinkButton-<%= incident.id %>' title='Copy Link'>
+            <i class='far fa-copy'></i>
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
-
-  </div>
-
-
 
     <!-- Title of the incident (category) -->
     <div class='d-flex flex-column'>
@@ -39,28 +34,29 @@
       </div>
       <!-- Date -->
       <div class="mt-0">
-      <i class="fa-solid fa-calendar-plus"></i>
-      Reported on
+        <i class="fa-solid fa-calendar-plus"></i>
+        Reported on
         <%= incident.created_at.strftime('%d') %>
         <%= incident.created_at.strftime('%B') %>
         <%= incident.created_at.strftime('%Y') %>
       </div>
       <!-- IT AFFECTS ME BTN-->
       <div class='d-flex justify-content-between mt-3'>
-        <%= simple_form_for incident, :url => toggle_pin_path(incident), :method => :patch do |f| %>
-
-          <% if incident.has_pins_by_user?(current_user) %>
-            <button type='submit' id='toggleButton' class='btn btn-light rounded-4 px-4 py-3 mb-3' style='color: #FF7900'>
-              <i class='fa-solid fa-triangle-exclamation' style='color: #FF7900;'></i>
-              Doesn't affect
-            </button>
-          <% else %>
-            <button type='submit' id='toggleButton' class='btn btn-primary text-white rounded-4 px-4 py-3 mb-3'>
-              <i class='fa-solid fa-triangle-exclamation' style='color: #ffffff;'></i>
-              It affects me
-            </button>
+        <%= turbo_frame_tag "toggle_button_#{incident.id}" do %>
+          <%= simple_form_for incident, remote: true, data: { form: 'toggle-pin' }, url: toggle_pin_path(incident), method: :patch do |f| %>
+            <% if incident.has_pins_by_user?(current_user) %>
+              <button type='submit' id='toggleButton' class='btn btn-light rounded-4 px-4 py-3 mb-3' style='color: #FF7900'>
+                <i class='fa-solid fa-triangle-exclamation' style='color: #FF7900;'></i>
+                Doesn't affect
+              </button>
+            <% else %>
+              <button type='submit' id='toggleButton' class='btn btn-primary text-white rounded-4 px-4 py-3 mb-3'>
+                <i class='fa-solid fa-triangle-exclamation' style='color: #ffffff;'></i>
+                  It affects me
+              </button>
+            <% end %>
           <% end %>
-        <% end %>
+        <% end%>
         <%= link_to incident_comments_path(incident_id: incident.id) do %>
           <button type='button' class='btn btn-light rounded-4 px-4 py-3'>
             <%= incident.comments.count %> <%= 'comment'.pluralize(incident.comments_count) %>
@@ -70,32 +66,30 @@
     </div>
     <!-- Is it still there? -->
     <p class='mt-0'>Is it still there?
-      <button class='option-button btn btn-light rounded-4 py-0'
-      onclick='toggleColor(this)'><small>Yes</small></button>
-      <button class='option-button btn btn-light rounded-4 py-0'
-      onclick='toggleColor(this)'><small>No</small></button>
+      <button class='option-button btn btn-light rounded-4 py-0' onclick='toggleColor(this)'><small>Yes</small></button>
+      <button class='option-button btn btn-light rounded-4 py-0' onclick='toggleColor(this)'><small>No</small></button>
     </p>
     <script>
       function toggleColor(clickedButton) {
         const buttons = document.querySelectorAll('.option-button');
-
-        buttons.forEach(button => {
-          if (button === clickedButton) {
+          buttons.forEach(button => {
+            if (button === clickedButton) {
             // Toggle color for the clicked button
-            button.style.color = button.style.color === 'orange' ? 'black' : 'orange';
-            button.style.backgroundColor = button.style.backgroundColor === '#FFE9D6' ? 'black' : '#FFE9D6';
-            button.style.border = button.style.border === '1px solid #ddd' ? 'none' : '1px solid #ddd';
-          } else {
-            // Reset color for the other buttons
-            button.style.color = 'black';
-            button.style.backgroundColor = 'white';
-            button.style.border = '1px solid #ddd';
-          }
-        });
+              button.style.color = button.style.color === 'orange' ? 'black' : 'orange';
+              button.style.backgroundColor = button.style.backgroundColor === '#FFE9D6' ? 'black' : '#FFE9D6';
+              button.style.border = button.style.border === '1px solid #ddd' ? 'none' : '1px solid #ddd';
+            } else {
+          // Reset color for the other buttons
+              button.style.color = 'black';
+              button.style.backgroundColor = 'white';
+              button.style.border = '1px solid #ddd';
+            }
+          });
       }
     </script>
     <p><%= incident.description %></p>
     <!-- Existing code above -->
+
 
 <!-- Add Bootstrap Carousel for Incident Photos -->
 <div class="d-flex justify-content-center">
@@ -110,6 +104,7 @@
               </div>
             <% end %>
           </div>
+
         <button class="carousel-control-prev" type="button" data-bs-target="#incidentCarousel" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
@@ -121,8 +116,6 @@
       </div>
     <% end %>
 </div>
-
-
 
   </div>
 </div>

@@ -46,9 +46,9 @@
             <div class="text-right">
               <%= incident.created_at.strftime('%d %b %Y') %>
               <%= link_to '×', destroy_incident_path(incident),
-                data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
-                class: 'close btn bg-transparent btn-outline-primary',
-                style: 'border: none' %>
+                  data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
+                  class: "close btn btn-outline-primary#{incident.resolved? ? ' text-custom-color' : ''}",
+                  style: 'border: none' %>
             </div>
           </div>
         <% end %>
@@ -57,6 +57,4 @@
       <% end %>
     </div>
   </div>
-</div>
-</div>
 </div>
