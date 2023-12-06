@@ -42,19 +42,21 @@
       </div>
       <!-- IT AFFECTS ME BTN-->
       <div class='d-flex justify-content-between mt-3'>
-        <%= simple_form_for incident, :url => toggle_pin_path(incident), :method => :patch do |f| %>
-          <% if incident.has_pins_by_user?(current_user) %>
-            <button type='submit' id='toggleButton' class='btn btn-light rounded-4 px-4 py-3 mb-3' style='color: #FF7900'>
-              <i class='fa-solid fa-triangle-exclamation' style='color: #FF7900;'></i>
-              Doesn't affect
-            </button>
-          <% else %>
-            <button type='submit' id='toggleButton' class='btn btn-primary text-white rounded-4 px-4 py-3 mb-3'>
-              <i class='fa-solid fa-triangle-exclamation' style='color: #ffffff;'></i>
-              It affects me
-            </button>
+        <%= turbo_frame_tag "toggle_button_#{incident.id}" do %>
+          <%= simple_form_for incident, remote: true, data: { form: 'toggle-pin' }, url: toggle_pin_path(incident), method: :patch do |f| %>
+            <% if incident.has_pins_by_user?(current_user) %>
+              <button type='submit' id='toggleButton' class='btn btn-light rounded-4 px-4 py-3 mb-3' style='color: #FF7900'>
+                <i class='fa-solid fa-triangle-exclamation' style='color: #FF7900;'></i>
+                Doesn't affect
+              </button>
+            <% else %>
+              <button type='submit' id='toggleButton' class='btn btn-primary text-white rounded-4 px-4 py-3 mb-3'>
+                <i class='fa-solid fa-triangle-exclamation' style='color: #ffffff;'></i>
+                  It affects me
+              </button>
+            <% end %>
           <% end %>
-        <% end %>
+        <% end%>
         <%= link_to incident_comments_path(incident_id: incident.id) do %>
           <button type='button' class='btn btn-light rounded-4 px-4 py-3'>
             <%= incident.comments.count %> <%= 'comment'.pluralize(incident.comments_count) %>
@@ -70,20 +72,19 @@
     <script>
       function toggleColor(clickedButton) {
         const buttons = document.querySelectorAll('.option-button');
-
-        buttons.forEach(button => {
-          if (button === clickedButton) {
+          buttons.forEach(button => {
+            if (button === clickedButton) {
             // Toggle color for the clicked button
-            button.style.color = button.style.color === 'orange' ? 'black' : 'orange';
-            button.style.backgroundColor = button.style.backgroundColor === '#FFE9D6' ? 'black' : '#FFE9D6';
-            button.style.border = button.style.border === '1px solid #ddd' ? 'none' : '1px solid #ddd';
-          } else {
-            // Reset color for the other buttons
-            button.style.color = 'black';
-            button.style.backgroundColor = 'white';
-            button.style.border = '1px solid #ddd';
-          }
-        });
+              button.style.color = button.style.color === 'orange' ? 'black' : 'orange';
+              button.style.backgroundColor = button.style.backgroundColor === '#FFE9D6' ? 'black' : '#FFE9D6';
+              button.style.border = button.style.border === '1px solid #ddd' ? 'none' : '1px solid #ddd';
+            } else {
+          // Reset color for the other buttons
+              button.style.color = 'black';
+              button.style.backgroundColor = 'white';
+              button.style.border = '1px solid #ddd';
+            }
+          });
       }
     </script>
     <p><%= incident.description %></p>
