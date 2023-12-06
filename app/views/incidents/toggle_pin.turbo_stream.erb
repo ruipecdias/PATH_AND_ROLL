@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "toggle_button_#{incident.id}" do %>
+  <%= render partial: 'incidents/toggle_button', locals: { incident: @incident } %>
+<% end %>
