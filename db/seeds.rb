@@ -93,7 +93,7 @@ userimg =[
   "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701446848/Screen_Shot_2023-12-01_at_16.03.21_avwntz.png",
   "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701446848/Screen_Shot_2023-12-01_at_16.03.00_ya4fqs.png",
   "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701446849/146834417_w4mtww.jpg",
-  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701444685/n0pjqvod2fv4gh67mh2vr18ojp9y.jpg"
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701446849/146834417_w4mtww.jpg",
 ]
 
 
