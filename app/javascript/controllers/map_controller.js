@@ -61,7 +61,7 @@ export default class extends Controller {
         // console.log(userAddress)
       })
     // Store the address with cookies
-        
+
 
 
         // Create a marker for the user's location
@@ -99,4 +99,3 @@ export default class extends Controller {
     });
   }
 }
-
