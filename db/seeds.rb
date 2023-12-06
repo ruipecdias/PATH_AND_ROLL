@@ -113,6 +113,7 @@ additional_imgurls = ["https://res.cloudinary.com/dnwea2j0w/image/upload/v170144
     status: false
   )
 
+
   incident3 = Incident.create!(
     user: hawking,
     location: 'Rua Luciano Cordeiro 103, Lisbon',

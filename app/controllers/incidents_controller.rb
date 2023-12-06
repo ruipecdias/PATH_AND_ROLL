@@ -9,6 +9,16 @@ class IncidentsController < ApplicationController
     @incident = Incident.new(incident_params)
     @incident.user = current_user
 
+    uploaded_files = params[:incident][:photos]
+    path = File.join Rails.root, 'public', 'uploads'
+    FileUtils.mkdir_p(path) unless File.exist?(path)
+    # Save the file to a specific location
+      uploaded_files.reject{|f| f == ""}.each do |uploaded_file|
+        File.open(File.join(path, uploaded_file.original_filename), 'wb') do |file|
+          file.write(uploaded_file.read)
+        end
+      end
+
     if @incident.save
       redirect_to dashboard_path, notice: 'Incident was successfully created.'
     else
