@@ -6,6 +6,7 @@ Incident.destroy_all
 User.destroy_all
 
 # Users
+puts "Users completed!"
 
 stevie = User.create!(
   email: 'stevie@wonder.com',
@@ -63,7 +64,14 @@ anto = User.create!(
   last_name: 'Correale'
 )
 
-users = [stevie, frida, hawking, reeve, salvador, nick, bocelli, anto]
+antonella = User.create!(
+  email: 'antonellacorreale@gmail.com',
+  password:'123456',
+  first_name: 'Antonella',
+  last_name: 'Correale'
+)
+
+users = [stevie, frida, hawking, reeve, salvador, nick, bocelli, anto, antonella]
 
 
 userimg =[
@@ -74,7 +82,8 @@ userimg =[
   "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701876822/salvador_xjk4gs.png",
   "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701876822/nick_gb8yvu.jpg",
   "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701876614/bocelli_rrxito.jpg",
-  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701876614/bocelli_rrxito.jpg"
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701876614/bocelli_rrxito.jpg",
+  "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701948646/avatar_b8sllq.jpg"
 ]
 
 
@@ -95,7 +104,7 @@ additional_imgurls = ["https://res.cloudinary.com/dnwea2j0w/image/upload/v170144
 "https://res.cloudinary.com/dnwea2j0w/image/upload/v1701365047/xlfu79agdpnnard3j88n.jpg"]
 
 # Incidents
-
+puts "Incidents completed!"
   incident1 = Incident.create!(
     user: stevie,
     location: 'Rua Tomás Ribeiro 115f, Lisbon',
@@ -106,16 +115,16 @@ additional_imgurls = ["https://res.cloudinary.com/dnwea2j0w/image/upload/v170144
   )
 
   incident2 = Incident.create!(
-    user: frida,
+    user: antonella,
     location: 'Calçada Conde Pombeiro 10, Lisbon',
     category: 'Construction',
     description: "Spotted an obstacle in Intendente, making mobility tricky. 🚧",
-    status: false
+    status: true
   )
 
 
   incident3 = Incident.create!(
-    user: hawking,
+    user: antonella,
     location: 'Rua Luciano Cordeiro 103, Lisbon',
     category: 'Construction',
     description: "Observing a substantial obstacle,
@@ -125,11 +134,11 @@ additional_imgurls = ["https://res.cloudinary.com/dnwea2j0w/image/upload/v170144
   )
 
   incident4 = Incident.create!(
-    user: reeve,
+    user: nick,
     location: 'Praça da Figueira, Lisbon',
     category: 'Accident',
     description: "Tram collision",
-    status: false
+    status: true
   )
 
   incident5 = Incident.create!(
@@ -152,7 +161,7 @@ additional_imgurls = ["https://res.cloudinary.com/dnwea2j0w/image/upload/v170144
     no-elevator vibe, especially around the stair-infested zones.
     🚫🏰 Considering taking up levitation or teleportation next.
     Meanwhile, a little accessibility magic would be nice.",
-    status: false
+    status: true
   )
 
   incident7 = Incident.create!(
@@ -203,6 +212,7 @@ incidents.each_with_index do |incident, index|
 end
 
 # Comments
+puts "Comments completed!"
 
   comment1 = Comment.create!(
     user: frida,
@@ -242,6 +252,7 @@ end
   )
 
 # People affected
+puts "People affected completed"
 
   steviepin = AffectingPin.create!(
     user_id: stevie.id,
@@ -276,6 +287,21 @@ end
   bocellipin = AffectingPin.create!(
     user_id: bocelli.id,
     incident_id: incident1.id
+  )
+
+  antonellapin = AffectingPin.create!(
+    user_id: antonella.id,
+    incident_id: incident5.id
+  )
+
+  antonellapin = AffectingPin.create!(
+    user_id: antonella.id,
+    incident_id: incident6.id
+  )
+
+  antonellapin = AffectingPin.create!(
+    user_id: antonella.id,
+    incident_id: incident7.id
   )
 
   puts "Seeding completed!"
