@@ -42,7 +42,7 @@
         <%= incident.created_at.strftime('%Y') %>
       </div>
       <!-- IT AFFECTS ME BTN-->
-      <div class='d-flex justify-content-between mt-3'>
+      <div class='d-flex justify-content-around mt-3'>
         <%= turbo_frame_tag "toggle_button_#{incident.id}" do %>
           <%= simple_form_for incident, remote: true, data: { form: 'toggle-pin' }, url: toggle_pin_path(incident), method: :patch do |f| %>
             <% if incident.has_pins_by_user?(current_user) %>
