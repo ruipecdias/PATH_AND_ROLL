@@ -1,6 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
 import mapboxgl from 'mapbox-gl'
-
 export default class extends Controller {
   static values = { apiKey: String, markers: Array }
   static targets = ["location"]
@@ -23,6 +22,7 @@ export default class extends Controller {
     this.markersValue.forEach((marker) => {
       const customMarker = document.createElement("div")
       customMarker.innerHTML = marker.marker_html
+      console.log(marker.marker_html)
 
       // Pass the element as an argument to the new marker
       new mapboxgl.Marker(customMarker)
@@ -65,7 +65,10 @@ export default class extends Controller {
 
 
         // Create a marker for the user's location
-        const userLocationMarker = new mapboxgl.Marker()
+        const customMarker1 = document.createElement("div")
+        customMarker1.className = "marker"
+        console.log(customMarker1)
+        const userLocationMarker = new mapboxgl.Marker(customMarker1)
           .setLngLat([userLng, userLat])
           .addTo(this.map);
       }, error => {
