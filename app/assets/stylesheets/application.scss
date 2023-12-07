@@ -16,7 +16,7 @@
 
 @media (max-width: 768px) {
     #map {
-      height: 30vh; /* Smaller height for mobile devices */
+      height: calc(100vh - 56px); /* Smaller height for mobile devices */
     }
   }
 
@@ -24,7 +24,7 @@
   .hidden {
     display: none;
   }
-  
+
   .visible {
     display: block; /* or 'flex', 'inline-block', etc., depending on your layout */
   }
