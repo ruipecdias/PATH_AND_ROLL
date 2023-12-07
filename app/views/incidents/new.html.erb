@@ -11,7 +11,7 @@
       <%= form_with(model: @incident, local: true, url: incidents_path) do |form| %>
         <div class="form-group">
           <i class='fa-solid fa-location-dot' style='color: #FF7900;'></i>
-          <%= form.label :location, "Where?", style: 'color: #FF7900;' %>
+          <strong><%= form.label :location, "Where?", style: 'color: #FF7900;' %></strong>
 
         <%= form.text_field :location, id: "user-location", class: "form-control rounded-4 my-2", required: true %>
 
