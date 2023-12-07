@@ -4,8 +4,10 @@
     <div class="navbar-nav flex-grow-1">
       <div class="d-flex justify-content-around">
         <%= link_to incidents_path, class: 'nav-link' do %>
-          <i class="icons fa-solid fa-house <%= 'active' if current_page?(incidents_path) %>"
-          style="color: <%= '#FF7900' if current_page?(incidents_path) %>;"></i>
+          <i class="icons fa-solid fa-house
+          <%= 'active' if current_page?(incidents_path) %>"
+          style="color: <%= '#FF7900' if current_page?(incidents_path) %>;">
+          </i>
         <% end %>
         <%= link_to new_incident_path(batata: @batatinha ), class: 'nav-link', id: 'new_incident_address' do %>
           <%= image_tag 'cone.png', class: 'cone p-0' %>
