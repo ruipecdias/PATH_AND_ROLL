@@ -94,13 +94,13 @@
 <!-- Add Bootstrap Carousel for Incident Photos -->
     <div class="d-flex justify-content-center">
         <% if incident.photos.count == 1 %>
-          <%= cl_image_tag incident.photos[0].key, height: 150, width: 323, crop: :fill, class: 'd-block rounded-4 mb-1' %>
+          <%= cl_image_tag incident.photos[0].key, height: 150, width: 325, crop: :fill, class: 'd-block mb-1' %>
         <% else %>
           <div id="incidentCarousel" class="carousel slide" data-bs-ride="carousel" style="width: 100%;">
               <div class="carousel-inner">
                 <% incident.photos.each_with_index do |photo, index| %>
                   <div class="carousel-item <%= index.zero? ? 'active' : '' %>">
-                    <%= cl_image_tag photo.key, height: 150, width: 323, crop: :fill, class: 'd-block rounded-4 mb-1' %>
+                    <%= cl_image_tag photo.key, height: 150, width: 350, crop: :fill, class: 'd-block mb-1' %>
                   </div>
                 <% end %>
               </div>
