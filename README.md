@@ -1,4 +1,4 @@
-# Path & Roll 🛣️🏞️
+# Path & Roll ♿🛣️🏞️
 
 ## Overview
 Path & Roll is a web application designed to assist people with mobility impairments in navigating their neighborhood safely. It focuses on identifying and reporting barriers in the streets, such as construction sites, obstructed sidewalks, and improperly parked cars.
