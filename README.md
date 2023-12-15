@@ -1,9 +1,9 @@
 # Path & Roll ♿🛣️🏞️
 
-## Overview
+## Overview 📋
 Path & Roll is a web application designed to assist people with mobility impairments in navigating their neighborhood safely. It focuses on identifying and reporting barriers in the streets, such as construction sites, obstructed sidewalks, and improperly parked cars.
 
-## Features
+## Features ⭐
 - **Incident Reporting:**
   - Users can report incidents that hinder their mobility.
   - Each incident includes details, pictures, and the user's commentary.
@@ -17,7 +17,7 @@ Path & Roll is a web application designed to assist people with mobility impairm
   - Aiming to be a tool for city officials to monitor and address incidents promptly.
   - Provides insights into the number of affected users and the overall safety of streets.
 
-## Technologies Used
+## Technologies Used 💻
 - Ruby on Rails
 - JavaScript
 - Bootstrap
@@ -25,14 +25,14 @@ Path & Roll is a web application designed to assist people with mobility impairm
 - Sass (for styles)
 - Devise (for authentication)
 
-## Usage
+## Usage 🚀
 Access the web app through your preferred web browser, preferably on a mobile device.
 Create an account or log in using Devise authentication.
 Report incidents, provide updates, and contribute to creating safer streets.
 
-## Contributing
+## Contributing 🤝
 We welcome contributions to enhance the app's features and improve accessibility. Feel free to open issues or pull requests.
 
 
-## Acknowledgments
+## Acknowledgments 🙌
 Thanks to the contributors and users who help make Path & Roll a valuable tool for the community.
