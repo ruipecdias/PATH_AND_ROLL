@@ -24,6 +24,7 @@ Path & Roll is a web application designed to assist people with mobility impairm
 - Heroku (for deployment)
 - Sass (for styles)
 - Devise (for authentication)
+- Mapbox (for location services)
 
 ## Usage 🚀
 Access the web app through your preferred web browser, preferably on a mobile device.
