@@ -25,35 +25,14 @@ Path & Roll is a web application designed to assist people with mobility impairm
 - Sass (for styles)
 - Devise (for authentication)
 
-## Installation and Setup
-1. Clone the repository.
-   ```bash
-   git clone [repository_url]
-Install dependencies.
-
-bash
-Copy code
-bundle install
-Set up the database.
-
-bash
-Copy code
-rake db:create
-rake db:migrate
-Start the server.
-
-bash
-Copy code
-rails server
-Usage
+## Usage
 Access the web app through your preferred web browser, preferably on a mobile device.
 Create an account or log in using Devise authentication.
 Report incidents, provide updates, and contribute to creating safer streets.
-Contributing
+
+## Contributing
 We welcome contributions to enhance the app's features and improve accessibility. Feel free to open issues or pull requests.
 
-License
-This project is licensed under the [License Name] - see the LICENSE.md file for details.
 
-Acknowledgments
+## Acknowledgments
 Thanks to the contributors and users who help make Path & Roll a valuable tool for the community.
